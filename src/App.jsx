@@ -66,7 +66,7 @@ function BookForm() {
         </button>
       </div>
       {status === 'error' && <p className="error-box" role="alert">{errorMsg}</p>}
-      <p className="form-disclaimer">Free. No pitch attached. Just the framework.</p>
+      <p className="form-disclaimer">Free. No strings attached.</p>
     </form>
   )
 }
