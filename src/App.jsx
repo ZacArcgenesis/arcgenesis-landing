@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 // ─── Book Download Form ──────────────────────────────────────────────────────
@@ -208,6 +208,325 @@ function CohortForm() {
   )
 }
 
+// ─── Phone Section ───────────────────────────────────────────────────────────
+
+const PS_SCENES = [
+  {
+    num: 'Scene 1 of 3',
+    title: 'This is what heirs are getting right now.',
+    body: 'A quarterly market update. Sent to every client family on the list. Her name is a mail merge field.',
+    bullets: [
+      { text: 'No personal connection', color: '#c0626a' },
+      { text: 'Nothing about her life', color: '#c0626a' },
+      { text: 'Opened, deleted, forgotten', color: '#c0626a' },
+    ],
+  },
+  {
+    num: 'Scene 2 of 3',
+    title: 'One message changes everything.',
+    body: 'Same advisor. Same heir. Completely different relationship.',
+    bullets: [
+      { text: 'Specific to her life', color: '#4fa876' },
+      { text: 'Timed perfectly', color: '#4fa876' },
+      { text: 'She replied. Then called.', color: '#4fa876' },
+    ],
+  },
+  {
+    num: 'Scene 3 of 3',
+    title: 'Now do that across your entire book.',
+    body: 'Every heir. Every message personal. Every relationship moving. 30 minutes a week.',
+    bullets: [
+      { text: '5 heirs — a personal message for each', color: '#0891b2' },
+      { text: '20 heirs — still personal, still specific', color: '#0891b2' },
+      { text: '50 heirs — your entire book, covered', color: '#0891b2' },
+    ],
+  },
+]
+
+const PS_PHONE_DATA = [
+  { n: 'Ava',    a: "Saw the student loan article — ran some numbers on your situation.",           r: "Yes. Been losing sleep over this." },
+  { n: 'Ben',    a: "Checking in on that business idea you floated. Talked to anyone yet?",        r: "Met with someone last week. Need your take." },
+  { n: 'Cara',   a: "New job starting — worth rolling over your old 401k before you forget.",      r: "Completely forgot about that. Thank you." },
+  { n: 'Dan',    a: "Before the truck purchase — let's look at what financing does to your timeline.", r: "Good call. Can we talk this week?" },
+  { n: 'Elise',  a: "Saw the layoff news in your field. Checking in before you had to wonder.",    r: "Honestly a little nervous. Would love to talk." },
+  { n: 'Frank',  a: "Hit the 3-month emergency fund goal. Most people never actually get there.",  r: "First time I've felt financially stable. Thank you." },
+  { n: 'Grace',  a: "Wedding coming up — have you two talked through combining finances yet?",     r: "We haven't. Can we schedule something soon?" },
+  { n: 'Henry',  a: "Market pullback this week doesn't affect your timeline at all.",              r: "Appreciate that. Was about to text you." },
+  { n: 'Iris',   a: "Roth conversion window is narrower than people realize. Short call before December?", r: "Yes — been meaning to ask about this." },
+  { n: 'Jake',   a: "How's the new city? Need any local financial referrals?",                     r: "Love it here. Actually need a local CPA." },
+  { n: 'Kim',    a: "Your parents' documents probably haven't been updated in years.",             r: "You're right. I've been avoiding it." },
+  { n: 'Leo',    a: "Congrats on the promotion — your withholding probably needs an update.",      r: "Didn't even think of that. Yes please." },
+  { n: 'Mia',    a: "Freelance income will hit differently at tax time. Want to get ahead of it?", r: "Last year was a mess. Let's do it." },
+  { n: 'Noah',   a: "You asked about I-bonds last year — rates just changed, still makes sense.",  r: "Perfect timing. Just looking this up." },
+  { n: 'Olivia', a: "Checking in after the big move. How are you settling in financially?",        r: "It's been a lot. Would love to reconnect." },
+  { n: 'Paul',   a: "Home sale equity has been sitting in cash. Want to make sure that's intentional.", r: "Ha. Definitely procrastination. Call me?" },
+  { n: 'Quinn',  a: "You mentioned investing this year — volatility right now is worth discussing.", r: "Been waiting for the right moment." },
+  { n: 'Rosa',   a: "Inheritance conversations don't have to be adversarial. Happy to help facilitate.", r: "My brother and I need to align. Help?" },
+  { n: 'Sam',    a: "Your car loan rate is higher than it needs to be. Refinancing worth a look.",  r: "Had no idea that was even an option." },
+  { n: 'Tara',   a: "Hit the 6-month savings target — let's talk about what the next goal looks like.", r: "I've been waiting to tell you this." },
+]
+
+// Shared phone visuals — used in both desktop and mobile renders
+function PSVisual0() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '28px', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div className="ps-phone" style={{ width: '220px', height: '440px' }}>
+        <div className="ps-phone-top"><span className="ps-ptime">9:41</span><span className="ps-ptime">●●●</span></div>
+        <div className="ps-pscreen">
+          <div className="ps-email-sender">
+            <div className="ps-av">JW</div>
+            <div>
+              <div style={{ fontSize: '9px', fontWeight: 600, color: '#111' }}>James Whitfield, CFP</div>
+              <div style={{ fontSize: '7px', color: '#888' }}>james@whitfieldwealth.com</div>
+            </div>
+          </div>
+          <div className="ps-email-head">
+            <div style={{ fontSize: '8px', color: '#999', marginBottom: '1px' }}>From: james@whitfieldwealth.com</div>
+            <div style={{ fontSize: '10px', fontWeight: 600, color: '#111', marginBottom: '1px' }}>Q1 2026 Market Commentary</div>
+            <div style={{ fontSize: '7px', color: '#bbb' }}>To: Client Families · Whitfield Wealth</div>
+          </div>
+          <div className="ps-email-body">
+            Dear Valued Client Family,<br /><br />
+            As we close out Q1 2026, I wanted to share some thoughts on recent market activity and what it may mean for your long-term financial plan.<br /><br />
+            The S&P 500 experienced moderate volatility, driven primarily by interest rate uncertainty...
+            <div style={{ fontSize: '7px', color: '#ccc', marginTop: '8px', paddingTop: '7px', borderTop: '0.5px solid #eee' }}>
+              To unsubscribe from future communications, click here.
+            </div>
+          </div>
+          <div className="ps-noreply">No reply · Opened briefly · Deleted</div>
+        </div>
+      </div>
+      <div style={{ maxWidth: '160px', fontSize: '13px', color: '#6b7385', lineHeight: 1.6 }}>
+        Sarah felt like just another name on a list.
+      </div>
+    </div>
+  )
+}
+
+function PSVisual1() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+        <span className="ps-tag-r">Before</span>
+        <div className="ps-phone" style={{ width: '190px', height: '400px' }}>
+          <div className="ps-phone-top"><span className="ps-ptime">9:41</span><span className="ps-ptime">●●●</span></div>
+          <div className="ps-pscreen">
+            <div style={{ background: '#f5f5f5', padding: '6px 10px', borderBottom: '0.5px solid #ddd', flexShrink: 0 }}>
+              <div style={{ fontSize: '8px', color: '#999' }}>From: james@whitfieldwealth.com</div>
+              <div style={{ fontSize: '9px', fontWeight: 600, color: '#111' }}>Q1 2026 Market Commentary</div>
+              <div style={{ fontSize: '7px', color: '#bbb' }}>To: Client Families</div>
+            </div>
+            <div style={{ padding: '9px 11px', flex: 1, fontSize: '8px', color: '#444', lineHeight: 1.55, overflow: 'hidden' }}>
+              Dear Valued Client Family,<br /><br />As we close Q1 2026, I wanted to share thoughts on market activity...
+            </div>
+            <div className="ps-noreply">No reply · Deleted</div>
+          </div>
+        </div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+        <span className="ps-tag-c">After</span>
+        <div className="ps-phone" style={{ width: '190px', height: '400px' }}>
+          <div className="ps-phone-top"><span className="ps-ptime">9:41</span><span className="ps-ptime">●●●</span></div>
+          <div className="ps-pdark">
+            <div className="ps-sms-head"><div className="ps-sms-name">Sarah Whitmore</div></div>
+            <div className="ps-sms-body">
+              <div className="ps-bo">Saw the Fed announcement this morning and immediately thought of you. The house timeline you mentioned — nothing to worry about, it actually works in your favor. Worth a quick call?</div>
+              <div style={{ height: '2px' }} />
+              <div className="ps-bi">Wait, really? I've been stressed about this all morning.</div>
+              <div className="ps-bo">Yes, really. Your rate is locked. Five minutes on Thursday?</div>
+              <div className="ps-bi">Thursday works. Thank you, seriously.</div>
+              <div className="ps-bread">Read · 9:44 AM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PSVisual2() {
+  return (
+    <div className="ps-grid-5">
+      {PS_PHONE_DATA.map((p, i) => (
+        <div key={i} className="ps-ph-sm" style={{ height: '115px' }}>
+          <div className="ps-pt-sm"><span className="ps-ptime-sm">9:41</span></div>
+          <div className="ps-pdark" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <div className="ps-sh-sm"><div className="ps-sn-sm">{p.n}</div></div>
+            <div className="ps-sb-sm">
+              <div className="ps-bo-sm">{p.a}</div>
+              <div className="ps-bi-sm">{p.r}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const PS_VISUALS = [PSVisual0, PSVisual1, PSVisual2]
+
+function PSSceneText({ scene, current, goTo }) {
+  return (
+    <div className="ps-scene-num-wrap">
+      <div className="ps-scene-num">{scene.num}</div>
+      <h3 className="ps-scene-title">{scene.title}</h3>
+      <p className="ps-scene-body">{scene.body}</p>
+      <div className="ps-bullets">
+        {scene.bullets.map((b, j) => (
+          <div key={j} className="ps-bullet">
+            <div className="ps-bullet-dot" style={{ background: b.color }} />
+            {b.text}
+          </div>
+        ))}
+      </div>
+      {goTo && (
+        <div className="ps-progress">
+          {[0, 1, 2].map(n => (
+            <div key={n} className={`ps-pdot${current === n ? ' on' : ''}`} onClick={() => goTo(n)} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function PhoneSection() {
+  const [current, setCurrent] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const currentRef = useRef(0)
+  const mobileRef = useRef(false)
+  const outerRef = useRef(null)
+
+  useEffect(() => {
+    const check = () => {
+      const m = window.innerWidth <= 768
+      mobileRef.current = m
+      setIsMobile(m)
+    }
+    check()
+    window.addEventListener('resize', check, { passive: true })
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  function goTo(n) { currentRef.current = n; setCurrent(n) }
+
+  useEffect(() => {
+    function handleScroll() {
+      if (mobileRef.current) return
+      const outer = outerRef.current
+      if (!outer) return
+      const rect = outer.getBoundingClientRect()
+      const total = outer.offsetHeight - window.innerHeight
+      let scrolled = -rect.top
+      if (scrolled < 0) scrolled = 0
+      if (scrolled > total) scrolled = total
+      const progress = scrolled / total
+      const scene = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2
+      if (scene !== currentRef.current) goTo(scene)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const header = (
+    <div className="ps-header">
+      <span className="eyebrow">See the difference</span>
+      <h2 className="ps-headline">What heirs actually experience when you use ArcGenesis.</h2>
+      <p className="ps-sub">Scroll through to see how the relationship changes — and what it looks like across your entire book.</p>
+    </div>
+  )
+
+  // ── Mobile: flat interleaved layout ──────────────────────────────────────
+  if (isMobile) {
+    return (
+      <section className="section-wrap bg-white">
+        {header}
+        <div className="ps-mobile-stack">
+          {PS_SCENES.map((scene, i) => {
+            const Visual = PS_VISUALS[i]
+            return (
+              <div key={i} className="ps-mobile-item">
+                <PSSceneText scene={scene} current={i} goTo={null} />
+                <div className="ps-mobile-visual">
+                  <Visual />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    )
+  }
+
+  // ── Desktop: sticky scroll ────────────────────────────────────────────────
+  return (
+    <section className="section-wrap bg-white">
+      {header}
+      <div className="ps-scroll-outer" ref={outerRef}>
+        <div className="ps-scroll-sticky">
+          <div className="ps-inner">
+            <div className="ps-left">
+              {PS_SCENES.map((scene, i) => (
+                <div key={i} className={`ps-scene-block${current === i ? ' active' : ''}`}>
+                  <PSSceneText scene={scene} current={current} goTo={goTo} />
+                </div>
+              ))}
+            </div>
+            <div className="ps-right">
+              {PS_VISUALS.map((Visual, i) => (
+                <div key={i} className={`ps-phone-scene${current === i ? ' active' : ''}`}>
+                  <Visual />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─── Stats Strip ─────────────────────────────────────────────────────────────
+
+function StatsStrip() {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.25 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const stats = [
+    { number: '$124T', label: 'will transfer to heirs in the next decade' },
+    { number: '20%', label: 'of heirs keep their parents\' advisor' },
+    { number: '30 min', label: 'a week can change that' },
+  ]
+
+  return (
+    <section className="stats-strip">
+      <div className="stats-strip-inner" ref={ref}>
+        {stats.map((s, i) => (
+          <div
+            key={i}
+            className={`stats-strip-item${visible ? ' visible' : ''}`}
+            style={{ transitionDelay: `${i * 130}ms` }}
+          >
+            <span className="stats-strip-number">{s.number}</span>
+            <span className="stats-strip-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -219,28 +538,20 @@ export default function App() {
       {/* ── Navbar — full width ───────────────────────────────────────────── */}
       <header className="navbar">
         <div className="navbar-inner">
-          <span className="navbar-logo">
-            <span style={{ color: '#ffffff' }}>ArcGenesis</span>
-            <span style={{ color: '#37d3f1' }}> Finance</span>
-          </span>
+          <a
+            href="#"
+            className="navbar-logo"
+            onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          >
+            <img src="/logo-mark.png" alt="ArcGenesis" className="navbar-mark" />
+            <span className="navbar-logo-text">RCGENESIS</span>
+          </a>
           <a
             href="#get-framework"
+            className="navbar-cta"
             onClick={e => {
               e.preventDefault()
               document.getElementById('get-framework')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-            style={{
-              fontFamily: 'Syne, sans-serif',
-              fontWeight: 700,
-              fontSize: '0.9375rem',
-              background: '#37d3f1',
-              color: '#20232a',
-              borderRadius: '6px',
-              padding: '10px 20px',
-              border: 'none',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              transition: 'filter 0.15s',
             }}
             onMouseEnter={e => e.currentTarget.style.filter = 'brightness(0.88)'}
             onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
@@ -254,7 +565,7 @@ export default function App() {
           HERO — full width dark background
       ══════════════════════════════════════════════════════════════════ */}
       <section
-        className="section-wrap bg-dark"
+        className="section-wrap bg-dark hero-section"
         style={{ borderTop: '4px solid var(--accent)' }}
       >
         <div className="container section-pad" style={{ maxWidth: '1400px' }}>
@@ -262,78 +573,107 @@ export default function App() {
 
             {/* Left: text */}
             <div className="hero-left">
+              <span className="eyebrow">Heir Relationship Intelligence</span>
               <h1 className="hero-headline">
                 You've done everything right for your clients.{' '}
                 <span style={{ color: 'var(--accent)' }}>And their heirs are still going to leave.</span>
               </h1>
               <p className="hero-sub">
-                Only 20% of heirs keep their parents' financial advisor after inheritance. The other 80% don't leave because of bad performance. They leave because they <em>NEVER CHOSE YOU.</em>
+                Only 20% of heirs keep their parents' financial advisor after inheritance. The other 80% don't leave because of bad performance. They leave because they <em>never chose you.</em>
               </p>
             </div>
 
-            {/* Right: geometric SVG illustration */}
+            {/* Right: dashboard mockup */}
             <div className="hero-right">
-              <svg
-                viewBox="0 0 500 500"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ width: '100%', maxWidth: '560px', display: 'block' }}
-                aria-hidden="true"
-              >
-                {/* Faint backdrop circle — slightly larger than anchor */}
-                <circle cx="250" cy="265" r="195" fill="rgba(55,211,241,0.04)" />
-
-                {/* Small faint rectangle — upper left */}
-                <rect x="42" y="88" width="52" height="52" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-
-                {/* Main anchor circle — large, outlined */}
-                <circle cx="250" cy="265" r="162" fill="rgba(55,211,241,0.06)" stroke="#37d3f1" strokeWidth="1.5" />
-
-                {/* Secondary circle — upper right, faint fill */}
-                <circle cx="392" cy="88" r="66" fill="rgba(55,211,241,0.12)" stroke="#37d3f1" strokeWidth="1" />
-
-                {/* Faint outline circle — lower left */}
-                <circle cx="80" cy="415" r="42" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
-
-                {/* Small faint rectangle — lower right */}
-                <rect x="400" y="340" width="60" height="60" fill="rgba(55,211,241,0.08)" stroke="rgba(55,211,241,0.2)" strokeWidth="1" />
-
-                {/* Connecting lines */}
-                {/* Center to secondary circle */}
-                <line x1="250" y1="265" x2="392" y2="88" stroke="#37d3f1" strokeWidth="0.75" opacity="0.35" />
-                {/* Center to lower-left outline circle */}
-                <line x1="250" y1="265" x2="80" y2="415" stroke="#37d3f1" strokeWidth="0.75" opacity="0.25" />
-                {/* Secondary circle down to lower-right rect */}
-                <line x1="392" y1="154" x2="430" y2="340" stroke="rgba(55,211,241,0.2)" strokeWidth="0.75" />
-                {/* Upper-left rect to main circle edge */}
-                <line x1="94" y1="114" x2="140" y2="175" stroke="rgba(55,211,241,0.25)" strokeWidth="0.75" />
-                {/* Subtle horizontal crossing line */}
-                <line x1="48" y1="265" x2="452" y2="265" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-
-                {/* Rotated square — overlapping center of main circle */}
-                <rect
-                  x="194" y="209"
-                  width="112" height="112"
-                  fill="none"
-                  stroke="rgba(55,211,241,0.38)"
-                  strokeWidth="1"
-                  transform="rotate(45 250 265)"
-                />
-
-                {/* Accent dots — solid cyan */}
-                {/* Center dot */}
-                <circle cx="250" cy="265" r="6" fill="#37d3f1" />
-                {/* Center of secondary circle */}
-                <circle cx="392" cy="88" r="8" fill="#37d3f1" />
-                {/* Lower-left small solid */}
-                <circle cx="80" cy="415" r="14" fill="#37d3f1" />
-                {/* Intersection hint — lower right */}
-                <circle cx="430" cy="340" r="5" fill="#37d3f1" />
-              </svg>
+              <div className="hero-mockup">
+                {/* Window chrome */}
+                <div className="mockup-titlebar">
+                  <div className="mockup-dots">
+                    <span /><span /><span />
+                  </div>
+                  <span className="mockup-window-title">ArcGenesis · Heir Dashboard</span>
+                </div>
+                {/* Card list */}
+                <div className="mockup-body">
+                  <div className="mockup-card-header">
+                    <span className="mockup-live-dot" />
+                    <span className="mockup-card-title">Monday Briefing</span>
+                    <span className="mockup-date">Apr 14</span>
+                  </div>
+                  {[
+                    {
+                      name: 'Marcus Chen',
+                      stage: 'Building Trust',
+                      stageColor: 'rgba(239,68,68,0.18)',
+                      stageText: '#f87171',
+                      borderColor: '#ef4444',
+                      age: '47 days ago',
+                      ageColor: '#f59e0b',
+                      action: 'Resource share — forward the Roth conversion article. His Q2 deadline is approaching in 11 days.',
+                      actionColor: '#37d3f1',
+                    },
+                    {
+                      name: 'Sarah Whitmore',
+                      stage: 'Getting Acquainted',
+                      stageColor: 'rgba(100,116,139,0.2)',
+                      stageText: '#94a3b8',
+                      borderColor: '#475569',
+                      age: '28 days ago',
+                      ageColor: '#f59e0b',
+                      action: 'Personal check-in — follow up on the job offer she mentioned in March. That window is still open.',
+                      actionColor: '#37d3f1',
+                    },
+                    {
+                      name: 'David Park',
+                      stage: 'Active Partnership',
+                      stageColor: 'rgba(34,197,94,0.15)',
+                      stageText: '#4ade80',
+                      borderColor: '#22c55e',
+                      age: '12 days ago',
+                      ageColor: '#4ade80',
+                      action: 'Goal milestone — acknowledge his debt paydown. He hit the $5K mark. This is worth a specific message.',
+                      actionColor: '#4ade80',
+                    },
+                    {
+                      name: 'Emma Torres',
+                      stage: 'Getting Acquainted',
+                      stageColor: 'rgba(100,116,139,0.2)',
+                      stageText: '#94a3b8',
+                      borderColor: '#ef4444',
+                      age: '61 days ago',
+                      ageColor: '#f59e0b',
+                      action: 'Accountability check-in — she set a savings goal in February. No contact since. This relationship is at risk.',
+                      actionColor: '#f87171',
+                    },
+                  ].map((row, i) => (
+                    <div key={i} className="mockup-heir-card" style={{ borderLeftColor: row.borderColor }}>
+                      <div className="mockup-heir-top">
+                        <div className="mockup-heir-name-group">
+                          <span className="mockup-heir-name">{row.name}</span>
+                          <span className="mockup-heir-stage" style={{ background: row.stageColor, color: row.stageText }}>
+                            {row.stage}
+                          </span>
+                        </div>
+                        <div className="mockup-heir-meta">
+                          <span className="mockup-heir-age" style={{ color: row.ageColor }}>{row.age}</span>
+                          <button className="mockup-log-btn">Log touchpoint</button>
+                        </div>
+                      </div>
+                      <div className="mockup-heir-action">
+                        <span className="mockup-heir-icon">⏱</span>
+                        <span style={{ color: row.actionColor }}>{row.action}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      <StatsStrip />
 
       <main>
 
@@ -390,21 +730,21 @@ export default function App() {
             </div>
           </section>
 
-          <hr className="section-rule" />
+          <PhoneSection />
 
           {/* ════════════════════════════════════════════════════════════════
               FRAMEWORK + EMAIL FORM — white
           ════════════════════════════════════════════════════════════════ */}
-          <section className="section-wrap bg-white">
+          <section className="section-wrap bg-gray">
             <div className="container section-pad">
 
               {/* Two-column: text left, book cover right */}
               <div className="framework-two-col" style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr auto',
-                gap: '4rem',
+                gap: '6rem',
                 alignItems: 'center',
-                maxWidth: '900px',
+                maxWidth: '1000px',
                 marginInline: 'auto',
                 marginBottom: '3.5rem',
               }}>
