@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #ffffff;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: #1a1d24;
+}
+
+/* SECTION WRAPPER */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 64px 0;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #0891b2;
+  margin-bottom: 12px;
+}
+.section-headline {
+  font-family: 'Syne', system-ui;
+  font-size: 42px;
+  font-weight: 800;
+  color: #1a1d24;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+.section-sub {
+  font-size: 17px;
+  color: #6b7385;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+/* PINNED SCROLL CONTAINER */
+.scroll-outer {
+  position: relative;
+  height: 280vh;
+}
+.scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* TWO-COLUMN LAYOUT inside sticky */
+.sticky-left {
+  width: 42%;
+  flex-shrink: 0;
+  padding: 0 48px 0 0;
+}
+.sticky-right {
+  width: 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* SCENE LABELS — stack and fade */
+.scene-block {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.scene-block.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  position: relative;
+}
+
+.scene-num {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #0891b2;
+  margin-bottom: 10px;
+}
+.scene-title {
+  font-family: 'Syne', system-ui;
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a1d24;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.scene-body {
+  font-size: 16px;
+  color: #6b7385;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.scene-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bullet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #3a3f52;
+}
+.bullet-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* PROGRESS DOTS */
+.progress {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+}
+.pdot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #d0d4dc;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.pdot.on {
+  background: #0891b2;
+  transform: scale(1.3);
+}
+
+/* PHONE IMAGES */
+.phone-scene {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translate(-50%, -48%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.phone-scene.active {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* PHONE MOCKUPS */
+.ph-wrap { display: flex; gap: 12px; align-items: flex-start; }
+
+/* Scene 1: single email phone */
+.phone {
+  background: #111318;
+  border-radius: 36px;
+  border: 6px solid #2a2d36;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.08);
+}
+.phone-top {
+  background: #1a1d24;
+  padding: 9px 16px 7px;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.ptime { font-size: 10px; color: #6b7385; }
+.pscreen { background: #f0f0f0; flex: 1; display: flex; flex-direction: column; }
+.pdark { background: #1c1c1e; flex: 1; display: flex; flex-direction: column; }
+.email-sender {
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-bottom: 0.5px solid #ddd;
+  display: flex; align-items: center; gap: 8px;
+}
+.av {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #d0d4dc;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600; color: #666; flex-shrink: 0;
+}
+.email-head {
+  background: #fff;
+  padding: 9px 12px;
+  border-bottom: 0.5px solid #e8e8e8;
+}
+.email-body { padding: 10px 12px; font-size: 8px; color: #444; line-height: 1.55; flex: 1; }
+.noreply {
+  background: #fdf3e3;
+  border: 0.5px solid #e8d5b0;
+  border-radius: 6px;
+  padding: 7px 11px;
+  text-align: center;
+  margin: 8px 10px 10px;
+  font-size: 8px;
+  color: #b8860b;
+}
+.sms-head {
+  background: #1c1c1e;
+  padding: 7px 10px;
+  border-bottom: 0.5px solid #2c2c2e;
+  text-align: center;
+}
+.sms-name { font-size: 10px; font-weight: 600; color: #fff; }
+.sms-body { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.bi { background: #2c2c2e; border-radius: 13px 13px 13px 3px; padding: 7px 9px; font-size: 9px; color: #fff; line-height: 1.45; max-width: 85%; align-self: flex-start; }
+.bo { background: #0a7aff; border-radius: 13px 13px 3px 13px; padding: 7px 9px; font-size: 9px; color: #fff; line-height: 1.45; max-width: 85%; align-self: flex-end; }
+.bread { font-size: 7px; color: #8e8e93; text-align: right; }
+
+/* Tag pills */
+.tag-r { display: inline-block; font-size: 9px; background: rgba(192,98,106,0.1); color: #b85560; border: 0.5px solid rgba(192,98,106,0.3); border-radius: 100px; padding: 2px 9px; margin-bottom: 7px; }
+.tag-c { display: inline-block; font-size: 9px; background: rgba(8,145,178,0.08); color: #0891b2; border: 0.5px solid rgba(8,145,178,0.25); border-radius: 100px; padding: 2px 9px; margin-bottom: 7px; }
+
+/* scene 3 grid */
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 560px; }
+.ph-sm {
+  background: #111318;
+  border-radius: 18px;
+  border: 3px solid #2a2d36;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.pt-sm { background: #1a1d24; padding: 5px 8px 4px; display: flex; justify-content: space-between; flex-shrink: 0; }
+.ptime-sm { font-size: 7px; color: #6b7385; }
+.sh-sm { background: #1c1c1e; padding: 4px 6px; border-bottom: 0.5px solid #2c2c2e; text-align: center; }
+.sn-sm { font-size: 7px; font-weight: 600; color: #fff; }
+.sb-sm { padding: 5px 6px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.bi-sm { background: #2c2c2e; border-radius: 7px; padding: 3px 5px; font-size: 6px; color: #fff; line-height: 1.35; max-width: 87%; }
+.bo-sm { background: #0a7aff; border-radius: 7px; padding: 3px 5px; font-size: 6px; color: #fff; line-height: 1.35; max-width: 87%; align-self: flex-end; }
+.ph-name { display: none; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+
+  .section {
+    padding: 60px 24px 40px;
+  }
+  .section-headline { font-size: 28px; }
+  .section-sub { font-size: 15px; margin-bottom: 40px; }
+
+  /* Kill the sticky scroll entirely */
+  .scroll-outer { height: auto; }
+  .scroll-sticky {
+    position: relative;
+    height: auto;
+    display: block;
+  }
+  .scroll-sticky > div {
+    flex-direction: column !important;
+    padding: 0 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Each scene stacks as a full card */
+  .sticky-left { width: 100%; padding: 0; margin-bottom: 32px; }
+  .sticky-right { width: 100%; justify-content: center; }
+
+  /* Show all scene blocks stacked, not swapped */
+  .scene-block {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative !important;
+    pointer-events: auto !important;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #f0f2f6;
+  }
+  .scene-block:last-child { border-bottom: none; }
+
+  /* Show all phone scenes stacked */
+  .phone-scene {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative !important;
+    top: auto !important; left: auto !important;
+    margin-bottom: 48px;
+    justify-content: center;
+  }
+
+  /* Scene 1: narrow phone on mobile */
+  .phone { width: 200px !important; }
+
+  /* Scene 2: stack before/after vertically */
+  #scene-img-1 .ph-wrap,
+  #scene-img-1 > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 24px !important;
+  }
+
+  /* Scene 3: 4-col grid on mobile */
+  .grid-5 {
+    grid-template-columns: repeat(4, 1fr) !important;
+    width: 100% !important;
+    gap: 6px !important;
+  }
+
+  /* Hide progress dots on mobile - not needed without scroll logic */
+  .progress { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div style="background:#f5f6fa;border-bottom:1px solid #e8eaef;padding:16px 64px;font-family:'DM Sans',system-ui;font-size:13px;color:#6b7385">
+  ← Stats bar sits here above this section
+</div>
+
+<div class="section">
+  <div class="section-label">See the difference</div>
+  <div class="section-headline">What heirs actually experience when you use ArcGenesis.</div>
+  <div class="section-sub">Scroll through to see how the relationship changes — and what it looks like across your entire book.</div>
+</div>
+
+<div class="scroll-outer" id="scrollOuter">
+  <div class="scroll-sticky" id="scrollSticky">
+    <div style="max-width:1200px;margin:0 auto;padding:0 64px;display:flex;align-items:center;width:100%">
+
+      <!-- LEFT: scene text -->
+      <div class="sticky-left">
+
+        <div class="scene-block active" id="scene-text-0">
+          <div class="scene-num">Scene 1 of 3</div>
+          <div class="scene-title">This is what heirs are getting right now.</div>
+          <div class="scene-body">A quarterly market update. Sent to every client family on the list. Her name is a mail merge field.</div>
+          <div class="scene-bullets">
+            <div class="bullet"><div class="bullet-dot" style="background:#c0626a"></div>No personal connection</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#c0626a"></div>Nothing about her life</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#c0626a"></div>Opened, deleted, forgotten</div>
+          </div>
+          <div class="progress">
+            <div class="pdot on" onclick="goTo(0)"></div>
+            <div class="pdot" onclick="goTo(1)"></div>
+            <div class="pdot" onclick="goTo(2)"></div>
+          </div>
+        </div>
+
+        <div class="scene-block" id="scene-text-1">
+          <div class="scene-num">Scene 2 of 3</div>
+          <div class="scene-title">One message changes everything.</div>
+          <div class="scene-body">Same advisor. Same heir. Completely different relationship.</div>
+          <div class="scene-bullets">
+            <div class="bullet"><div class="bullet-dot" style="background:#4fa876"></div>Specific to her life</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#4fa876"></div>Timed perfectly</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#4fa876"></div>She replied. Then called.</div>
+          </div>
+          <div class="progress">
+            <div class="pdot" onclick="goTo(0)"></div>
+            <div class="pdot on" onclick="goTo(1)"></div>
+            <div class="pdot" onclick="goTo(2)"></div>
+          </div>
+        </div>
+
+        <div class="scene-block" id="scene-text-2">
+          <div class="scene-num">Scene 3 of 3</div>
+          <div class="scene-title">Now do that across your entire book.</div>
+          <div class="scene-body">Every heir. Every message personal. Every relationship moving. 30 minutes a week.</div>
+          <div class="scene-bullets">
+            <div class="bullet"><div class="bullet-dot" style="background:#0891b2"></div>5 heirs — a personal message for each</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#0891b2"></div>20 heirs — still personal, still specific</div>
+            <div class="bullet"><div class="bullet-dot" style="background:#0891b2"></div>50 heirs — your entire book, covered</div>
+          </div>
+          <div class="progress">
+            <div class="pdot" onclick="goTo(0)"></div>
+            <div class="pdot" onclick="goTo(1)"></div>
+            <div class="pdot on" onclick="goTo(2)"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: phone images -->
+      <div class="sticky-right">
+
+        <!-- Scene 0: mass email blast -->
+        <div class="phone-scene active" id="scene-img-0">
+          <div style="display:flex;align-items:center;gap:28px">
+            <div class="phone" style="width:220px;height:440px">
+              <div class="phone-top"><span class="ptime">9:41</span><span class="ptime">●●●</span></div>
+              <div class="pscreen">
+                <div class="email-sender">
+                  <div class="av">JW</div>
+                  <div><div style="font-size:9px;font-weight:600;color:#111">James Whitfield, CFP</div><div style="font-size:7px;color:#888">james@whitfieldwealth.com</div></div>
+                </div>
+                <div class="email-head">
+                  <div style="font-size:8px;color:#999;margin-bottom:1px">From: james@whitfieldwealth.com</div>
+                  <div style="font-size:10px;font-weight:600;color:#111;margin-bottom:1px">Q1 2026 Market Commentary</div>
+                  <div style="font-size:7px;color:#bbb">To: Client Families · Whitfield Wealth</div>
+                </div>
+                <div class="email-body">
+                  Dear Valued Client Family,<br><br>
+                  As we close out Q1 2026, I wanted to share some thoughts on recent market activity and what it may mean for your long-term financial plan.<br><br>
+                  The S&P 500 experienced moderate volatility, driven primarily by interest rate uncertainty...
+                  <div style="font-size:7px;color:#ccc;margin-top:8px;padding-top:7px;border-top:0.5px solid #eee">To unsubscribe from future communications, click here.</div>
+                </div>
+                <div class="noreply">No reply · Opened briefly · Deleted</div>
+              </div>
+            </div>
+            <div style="max-width:180px">
+              <div style="font-size:13px;color:#6b7385;line-height:1.6">Sarah felt like just another name on a list.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 1: personal text contrast -->
+        <div class="phone-scene" id="scene-img-1">
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div class="tag-r">Before</div>
+              <div class="phone" style="width:190px;height:400px">
+                <div class="phone-top"><span class="ptime">9:41</span><span class="ptime">●●●</span></div>
+                <div class="pscreen">
+                  <div style="background:#f5f5f5;padding:6px 10px;border-bottom:0.5px solid #ddd">
+                    <div style="font-size:8px;color:#999">From: james@whitfieldwealth.com</div>
+                    <div style="font-size:9px;font-weight:600;color:#111">Q1 2026 Market Commentary</div>
+                    <div style="font-size:7px;color:#bbb">To: Client Families</div>
+                  </div>
+                  <div style="padding:9px 11px;flex:1;font-size:8px;color:#444;line-height:1.55">Dear Valued Client Family,<br><br>As we close Q1 2026, I wanted to share thoughts on market activity...</div>
+                  <div class="noreply">No reply · Deleted</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div class="tag-c">After</div>
+              <div class="phone" style="width:190px;height:400px">
+                <div class="phone-top"><span class="ptime">9:41</span><span class="ptime">●●●</span></div>
+                <div class="pdark">
+                  <div class="sms-head"><div class="sms-name">Sarah Whitmore</div></div>
+                  <div class="sms-body">
+                    <div class="bo">Saw the Fed announcement this morning and immediately thought of you. The house timeline you mentioned — nothing to worry about, it actually works in your favor. Worth a quick call?</div>
+                    <div style="height:2px"></div>
+                    <div class="bi">Wait, really? I've been stressed about this all morning.</div>
+                    <div class="bo">Yes, really. Your rate is locked. Five minutes on Thursday?</div>
+                    <div class="bi">Thursday works. Thank you, seriously.</div>
+                    <div class="bread">Read · 9:44 AM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 2: scale grid -->
+        <div class="phone-scene" id="scene-img-2">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+            <div class="grid-5" id="scaleGrid"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:80px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',system-ui;font-size:13px;color:#9aa0b2">
+  ↓ Next section continues here
+</div>
+
+<script>
+var phones = [
+  {n:'Ava',    a:"Saw the student loan article — ran some numbers on your situation.",      r:"Yes. Been losing sleep over this."},
+  {n:'Ben',    a:"Checking in on that business idea you floated. Talked to anyone yet?",    r:"Met with someone last week. Need your take."},
+  {n:'Cara',   a:"New job starting — worth rolling over your old 401k before you forget.",  r:"Completely forgot about that. Thank you."},
+  {n:'Dan',    a:"Before the truck purchase — let's look at what financing does to your timeline.", r:"Good call. Can we talk this week?"},
+  {n:'Elise',  a:"Saw the layoff news in your field. Checking in before you had to wonder.", r:"Honestly a little nervous. Would love to talk."},
+  {n:'Frank',  a:"Hit the 3-month emergency fund goal. Most people never actually get there.", r:"First time I've felt financially stable. Thank you."},
+  {n:'Grace',  a:"Wedding coming up — have you two talked through combining finances yet?",  r:"We haven't. Can we schedule something soon?"},
+  {n:'Henry',  a:"Market pullback this week doesn't affect your timeline at all.",           r:"Appreciate that. Was about to text you."},
+  {n:'Iris',   a:"Roth conversion window is narrower than people realize. Short call before December?", r:"Yes — been meaning to ask about this."},
+  {n:'Jake',   a:"How's the new city? Need any local financial referrals?",                  r:"Love it here. Actually need a local CPA."},
+  {n:'Kim',    a:"Your parents' documents probably haven't been updated in years.",          r:"You're right. I've been avoiding it."},
+  {n:'Leo',    a:"Congrats on the promotion — your withholding probably needs an update.",   r:"Didn't even think of that. Yes please."},
+  {n:'Mia',    a:"Freelance income will hit differently at tax time. Want to get ahead of it?", r:"Last year was a mess. Let's do it."},
+  {n:'Noah',   a:"You asked about I-bonds last year — rates just changed, still makes sense.", r:"Perfect timing. Just looking this up."},
+  {n:'Olivia', a:"Checking in after the big move. How are you settling in financially?",     r:"It's been a lot. Would love to reconnect."},
+  {n:'Paul',   a:"Home sale equity has been sitting in cash. Want to make sure that's intentional.", r:"Ha. Definitely procrastination. Call me?"},
+  {n:'Quinn',  a:"You mentioned investing this year — volatility right now is worth discussing.", r:"Been waiting for the right moment."},
+  {n:'Rosa',   a:"Inheritance conversations don't have to be adversarial. Happy to help facilitate.", r:"My brother and I need to align. Help?"},
+  {n:'Sam',    a:"Your car loan rate is higher than it needs to be. Refinancing worth a look.", r:"Had no idea that was even an option."},
+  {n:'Tara',   a:"Hit the 6-month savings target — let's talk about what the next goal looks like.", r:"I've been waiting to tell you this."},
+];
+
+var grid = document.getElementById('scaleGrid');
+phones.forEach(function(p) {
+  var wrap = document.createElement('div');
+  wrap.innerHTML = '<div class="ph-sm" style="height:115px"><div class="pt-sm"><span class="ptime-sm">9:41</span></div><div class="pdark"><div class="sh-sm"><div class="sn-sm">'+p.n+'</div></div><div class="sb-sm"><div class="bo-sm">'+p.a+'</div><div class="bi-sm">'+p.r+'</div></div></div></div>';
+  grid.appendChild(wrap);
+});
+
+var current = 0;
+
+function goTo(n) {
+  document.getElementById('scene-text-' + current).classList.remove('active');
+  document.getElementById('scene-img-' + current).classList.remove('active');
+  current = n;
+  document.getElementById('scene-text-' + n).classList.add('active');
+  document.getElementById('scene-img-' + n).classList.add('active');
+}
+
+// Scroll-driven scene changes — desktop only
+var outer = document.getElementById('scrollOuter');
+function isMobile() { return window.innerWidth <= 768; }
+window.addEventListener('scroll', function() {
+  if (isMobile()) return;
+  var rect = outer.getBoundingClientRect();
+  var total = outer.offsetHeight - window.innerHeight;
+  var scrolled = -rect.top;
+  if (scrolled < 0) scrolled = 0;
+  if (scrolled > total) scrolled = total;
+  var progress = scrolled / total;
+  var scene = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2;
+  if (scene !== current) goTo(scene);
+});
+</script>
+
+</body>
+</html>
