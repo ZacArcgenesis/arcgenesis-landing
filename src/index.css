@@ -1555,6 +1555,184 @@ img { max-width: 100%; display: block; }
   font-style: italic;
 }
 
+/* ─── System access TOC ──────────────────────────────────────────────────── */
+/* Two layouts on the same component:
+   Desktop (>=1024px): sticky sidebar to the left of the content.
+   Mobile  (<1024px):  sticky "Jump to" pill at the top that toggles open. */
+.system-toc-layout {
+  display: block;
+}
+.system-toc-main { min-width: 0; }
+
+/* ── Mobile pill (default) ─────────────────────────────────────────────── */
+.system-toc {
+  position: sticky;
+  top: 3.5rem;            /* sits just below the sticky navbar */
+  z-index: 50;
+  background: rgba(22, 25, 31, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-d);
+}
+.system-toc-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem var(--px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.005em;
+  text-align: left;
+}
+.system-toc-pill-chevron {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.18s, opacity 0.18s;
+  margin-left: 0.75rem;
+}
+.system-toc.is-open .system-toc-pill-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+/* Slide-down panel on mobile. Hidden by default; expands when .is-open. */
+.system-toc-nav {
+  display: none;
+  padding: 0 var(--px) 1rem;
+  background: rgba(22, 25, 31, 0.96);
+  border-top: 1px solid var(--border-d);
+}
+.system-toc.is-open .system-toc-nav { display: block; }
+.system-toc-eyebrow {
+  display: none;  /* eyebrow is desktop-only flair */
+}
+.system-toc-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.system-toc-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.system-toc-link:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.05);
+}
+.system-toc-link.is-active {
+  color: var(--accent);
+  background: rgba(55, 211, 241, 0.08);
+}
+
+/* ── Desktop sidebar (>=1024px) ────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  /* Constrained layout: TOC + content stay together as a centered unit
+     so the page doesn't spread out on very wide screens. Sections extend
+     their bg to the viewport edges via the box-shadow trick below. */
+  .system-toc-layout {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: var(--px);
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  .system-toc-main { flex: 1; min-width: 0; }
+
+  /* Full-bleed section backgrounds. Each system-section block lives
+     inside the constrained main column, but we project its background
+     all the way to the viewport edges using a horizontal box-shadow
+     "extension" on each side. The actual content stays in the column. */
+  .system-toc-main .system-section {
+    box-shadow:
+      -100vw 0 0 var(--bg),
+       100vw 0 0 var(--bg);
+  }
+  .system-toc-main .system-section-alt {
+    box-shadow:
+      -100vw 0 0 var(--white),
+       100vw 0 0 var(--white);
+  }
+
+  /* Smaller inner gutter on the content side so text doesn't kiss the
+     section-band edges (the layout itself already pads-outer). */
+  .system-toc-main .container { padding-inline: 1.25rem; }
+
+  /* Card-style TOC. White panel with subtle border + shadow so it pops
+     against either the gray or white section bands behind it. */
+  .system-toc {
+    flex: 0 0 220px;
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.875rem 0.625rem;
+    /* Start the card aligned with the first section's heading instead
+       of flush against the hero. Matches the section's padding-block. */
+    margin-top: clamp(2.75rem, 6vw, 4.5rem);
+    box-shadow: 0 4px 14px rgba(32, 35, 42, 0.07);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    z-index: 1;
+  }
+  .system-toc-pill { display: none; }
+  .system-toc-nav {
+    display: block;
+    padding: 0;
+    background: none;
+    border: none;
+  }
+  .system-toc-eyebrow {
+    display: block;
+    margin: 0 0 0.625rem;
+    padding: 0 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .system-toc-nav ul { margin: 0; }
+  .system-toc-link {
+    position: relative;
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    color: var(--muted);
+    border-left: 2px solid transparent;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.8125rem;
+  }
+  .system-toc-link:hover {
+    color: var(--text);
+    background: var(--bg);
+  }
+  .system-toc-link.is-active {
+    color: var(--accent-ink);
+    border-left-color: var(--accent);
+    background: rgba(55, 211, 241, 0.06);
+    font-weight: 600;
+  }
+}
+
 /* ─── Audit sample (FreePrompt) ──────────────────────────────────────────── */
 /* Rendered to look like a saved markdown document — white "page" with a
    filename header, hierarchy of in-doc headings, and a numbered list. Sits

@@ -76,27 +76,6 @@ export default function EnvironmentAuditPage() {
         {/* ─── FAQ (reuses the home-page accordion component) ─────── */}
         <Faq headline={page.faqHeadline} items={page.faqItems} />
 
-        {/* ─── Cross-link strip: into the three guides ─────────────── */}
-        <section className="section-wrap crosslink-band">
-          <div className="container section-pad-sm">
-            <div className="audit-section-head text-center">
-              <h2>{CONTENT.crosslink.headline}</h2>
-            </div>
-
-            <div className="crosslink-grid">
-              {CONTENT.crosslink.items
-                .filter((item) => item.to !== '/environment-audit')
-                .map((item) => (
-                  <Link key={item.to} to={item.to} className="crosslink-card">
-                    <p className="crosslink-eyebrow">{item.eyebrow}</p>
-                    <h3 className="crosslink-title">{item.title}</h3>
-                    <p className="crosslink-line">{item.line}</p>
-                  </Link>
-                ))}
-            </div>
-          </div>
-        </section>
-
         {/* ─── Soft handoff to the main system ─────────────────────── */}
         <section className="section-wrap audit-handoff grid-texture">
           <div className="container section-pad">

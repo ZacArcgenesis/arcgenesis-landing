@@ -3,6 +3,7 @@ import JSZip from 'jszip'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
 import PromptWindow from '../components/PromptWindow.jsx'
+import SystemToc from '../components/SystemToc.jsx'
 import Navbar from '../sections/Navbar.jsx'
 import Footer from '../sections/Footer.jsx'
 import {
@@ -68,6 +69,16 @@ export default function SystemAccessPage() {
   // Global tool index across phases so each card shows 01–10 in order.
   let toolCounter = 0
 
+  // TOC sections — kept in the same order they appear on the page.
+  const tocSections = [
+    { id: 'start-here', label: 'Start here' },
+    ...SETUP_PHASES.map((phase) => ({
+      id: `phase-${phase.num}`,
+      label: `Phase ${phase.num}: ${phase.name}`,
+    })),
+    { id: 'ongoing-toolkit', label: 'Ongoing toolkit' },
+  ]
+
   return (
     <>
       <Navbar />
@@ -100,8 +111,14 @@ export default function SystemAccessPage() {
           </div>
         </section>
 
+        {/* ─── TOC + content wrap. The hero stays full-width above. ── */}
+        <div className="system-toc-layout">
+          <SystemToc sections={tocSections} />
+
+          <div className="system-toc-main">
+
         {/* ─── Start here / orientation ────────────────────────────── */}
-        <section className="section-wrap system-section">
+        <section id="start-here" className="section-wrap system-section">
           <div className="container section-pad">
             <div className="audit-section-head">
               <span className="eyebrow">{page.orientationEyebrow}</span>
@@ -196,6 +213,9 @@ export default function SystemAccessPage() {
             </div>
           </div>
         </section>
+
+          </div>
+        </div>
       </main>
       <Footer />
     </>

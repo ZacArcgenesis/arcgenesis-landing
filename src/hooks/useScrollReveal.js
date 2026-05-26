@@ -39,6 +39,11 @@ export default function useScrollReveal() {
 
     targets.forEach((el) => observer.observe(el))
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      // Pull the class so other pages (which don't run this hook) aren't
+      // left with .container { opacity: 0 } armed on <html>.
+      document.documentElement.classList.remove('reveal-ready')
+    }
   }, [])
 }
