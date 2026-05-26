@@ -52,7 +52,7 @@ export const TOOLKIT = [
   },
   {
     name: 'Plan Recalibrator',
-    line: 'Adjusts your budget when something changes — small tweaks or major overhauls.',
+    line: 'Adjusts your budget when something changes: small tweaks or major overhauls.',
   },
   {
     name: 'Goal Progress Checker',

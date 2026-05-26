@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import { TOOLKIT, SITE } from '../config/site.js'
 import Highlight from '../components/Highlight.jsx'
@@ -67,7 +68,7 @@ export default function Hero() {
             <p className="lead on-dark-muted hero-sub">{hero.subhead}</p>
 
             <div className="hero-cta-row">
-              <a href="#try" className="btn-primary">{hero.ctaPrimary}</a>
+              <Link to="/environment-audit" className="btn-primary">{hero.ctaPrimary}</Link>
               <a href="#pricing" className="btn-ghost">{hero.ctaSecondary}</a>
             </div>
 

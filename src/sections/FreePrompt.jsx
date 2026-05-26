@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
-import { FREE_PROMPT } from '../config/prompt.js'
 import Highlight from '../components/Highlight.jsx'
-import PromptWindow from '../components/PromptWindow.jsx'
 
 /**
- * FreePrompt — dark band. The "experience the product" moment: a real tool
- * the visitor can copy and run before deciding anything.
+ * FreePrompt — dark band. Used to embed the prompt inline; now teases the
+ * Environment Audit and links to its dedicated page (/environment-audit).
+ * Keeps the funnel rhythm — the "let them try it" moment is still here, but
+ * the actual prompt lives on its own URL so creators can link to it directly.
  */
 export default function FreePrompt() {
   const { freePrompt } = CONTENT
@@ -19,13 +20,15 @@ export default function FreePrompt() {
             <Highlight text={freePrompt.headline} />
           </h2>
           <p className="lead on-dark-muted">{freePrompt.intro}</p>
-          <p className="lead on-dark-muted" style={{ marginTop: '1rem', fontSize: '0.9375rem' }}>
-            {FREE_PROMPT.instruction}
+
+          <div style={{ marginTop: '2.25rem' }}>
+            <Link to="/environment-audit" className="btn-primary">
+              {freePrompt.ctaLabel}
+            </Link>
+          </div>
+          <p className="hero-reassurance" style={{ marginTop: '1.25rem' }}>
+            {freePrompt.ctaSub}
           </p>
-
-          <PromptWindow />
-
-          <p className="prompt-footnote">{FREE_PROMPT.footnote}</p>
         </div>
       </div>
     </section>

@@ -3,12 +3,15 @@ import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
 
 /**
- * Faq — light band. Accordion handling the warm-but-skeptical visitor's
- * honest objections. First item open by default.
+ * Faq — light band. Accordion handling honest objections. First item open by
+ * default. Defaults to home-page copy from CONTENT.faq; pass `headline` and
+ * `items` to render a page-specific FAQ (e.g. on the Environment Audit page).
  */
-export default function Faq() {
-  const { faq } = CONTENT
-  const [open, setOpen] = useState(0)
+export default function Faq({ headline, items, defaultOpen = 0 }) {
+  const fallback = CONTENT.faq
+  const renderHeadline = headline ?? fallback.headline
+  const renderItems = items ?? fallback.items
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
     <section className="section-wrap bg-gray">
@@ -16,11 +19,11 @@ export default function Faq() {
         <div className="prose">
           <div className="accent-bar" />
           <h2 className="headline-lg">
-            <Highlight text={faq.headline} />
+            <Highlight text={renderHeadline} />
           </h2>
 
           <div className="faq-list">
-            {faq.items.map((item, i) => {
+            {renderItems.map((item, i) => {
               const isOpen = open === i
               return (
                 <div key={i} className={`faq-item${isOpen ? ' open' : ''}`}>

@@ -269,6 +269,101 @@ img { max-width: 100%; display: block; }
   color: rgba(255, 255, 255, 0.5);
   margin-left: 0.5em;
 }
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.navbar-link {
+  display: none;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+@media (min-width: 640px) {
+  .navbar-link { display: inline-flex; align-items: center; }
+}
+.navbar-link:hover { color: var(--white); }
+.navbar-link.is-active { color: var(--accent); }
+
+/* Dropdown wrapper — relative anchor for the absolute panel. */
+.navbar-dropdown {
+  position: relative;
+  display: none;
+}
+@media (min-width: 640px) {
+  .navbar-dropdown { display: inline-flex; align-items: center; }
+}
+.navbar-dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  /* inherits .navbar-link visual styling */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.navbar-dropdown-chevron {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.navbar-dropdown:hover .navbar-dropdown-chevron,
+.navbar-dropdown:focus-within .navbar-dropdown-chevron {
+  transform: translateY(1px);
+  opacity: 1;
+}
+
+/* Panel — hidden by default; opens on hover or keyboard focus. */
+.navbar-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 240px;
+  padding: 0.5rem;
+  background: rgba(22, 25, 31, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 12px 30px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  z-index: 110;
+}
+.navbar-dropdown:hover .navbar-dropdown-panel,
+.navbar-dropdown:focus-within .navbar-dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.navbar-dropdown-item {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.navbar-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+}
+.navbar-dropdown-item.is-active { color: var(--accent); }
 .navbar-cta {
   display: inline-flex;
   align-items: center;
@@ -829,3 +924,580 @@ img { max-width: 100%; display: block; }
   .reveal-ready .container { opacity: 1; transform: none; }
   .hero-visual::before { animation: none; opacity: 0.6; }
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Environment Audit page
+   Styled as a standalone lead-magnet experience: a centered dark hero
+   with a cyan glow, the prompt card sitting on a light band beneath, a
+   "how to use it" grid, FAQ, and a soft handoff back to the main system.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Audit hero ─────────────────────────────────────────────────────────── */
+.audit-hero {
+  position: relative;
+  background: var(--dark);
+  color: var(--white);
+  overflow: hidden;
+  padding: clamp(7rem, 14vw, 10rem) 0 clamp(4rem, 9vw, 6rem);
+}
+.audit-hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(55, 211, 241, 0.13),
+    transparent 55%
+  );
+  filter: blur(20px);
+}
+.audit-hero-inner {
+  position: relative;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.audit-hero .eyebrow {
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.audit-hero h1 {
+  margin: 0 auto;
+  max-width: 640px;
+}
+.audit-hero-sub {
+  margin: 1.5rem auto 0;
+  font-size: clamp(1rem, 1.4vw, 1.0625rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 540px;
+}
+.audit-hero-meta {
+  margin: 2.25rem auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ─── The prompt section (light band) ───────────────────────────────────── */
+.audit-prompt-band {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.audit-section-head {
+  max-width: var(--prose-w);
+  margin: 0 auto;
+}
+.audit-section-head h2 {
+  margin: 0;
+  font-size: clamp(1.625rem, 3.4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+.audit-section-head p {
+  margin: 1rem 0 0;
+  font-size: clamp(1rem, 1.4vw, 1.0625rem);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 580px;
+}
+.audit-prompt-wrap {
+  max-width: var(--prose-w);
+  margin: 2.5rem auto 0;
+  position: relative;
+}
+/* A cyan glow blob behind the upper-right of the prompt card. */
+.audit-prompt-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3rem -1.5rem auto auto;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(55, 211, 241, 0.18), transparent 65%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 0;
+}
+.audit-prompt-wrap .prompt-window {
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px rgba(20, 22, 26, 0.18),
+    0 8px 18px rgba(20, 22, 26, 0.10);
+}
+.audit-prompt-after {
+  margin: 2.5rem auto 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+  text-align: center;
+  max-width: 560px;
+}
+
+/* ─── How to use it (2x2 card grid) ─────────────────────────────────────── */
+.audit-howto {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.audit-howto-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 2.5rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+}
+@media (min-width: 720px) {
+  .audit-howto-grid { grid-template-columns: 1fr 1fr; }
+  .audit-howto-card:nth-child(2n) { border-right: none; }
+  .audit-howto-card:nth-child(n+3) { border-bottom: none; }
+}
+.audit-howto-card {
+  padding: 2rem 1.75rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.audit-howto-card:last-child { border-right: none; border-bottom: none; }
+@media (min-width: 720px) {
+  .audit-howto-card:nth-child(3) { border-bottom: none; }
+}
+.audit-howto-card:hover { background: var(--bg); }
+.audit-howto-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin: 0 0 0.875rem;
+}
+.audit-howto-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.audit-howto-body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+/* ─── Soft handoff (dark CTA band) ───────────────────────────────────────── */
+.audit-handoff {
+  position: relative;
+  background: var(--dark);
+  color: var(--white);
+  overflow: hidden;
+}
+.audit-handoff-inner {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.audit-handoff h2 {
+  margin: 0 auto;
+  max-width: 560px;
+  font-size: clamp(1.625rem, 3.4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+  color: var(--white);
+}
+.audit-handoff-sub {
+  margin: 1.5rem auto 2.5rem;
+  font-size: clamp(1rem, 1.4vw, 1.0625rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 520px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Guide pages (long-form articles)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.guide-article-band {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Guide accordion (one section open at a time) ─────────────────────── */
+.guide-accordion {
+  max-width: var(--prose-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.guide-accordion-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-accordion-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  transition: color 0.15s;
+}
+.guide-accordion-header:hover { color: var(--accent-ink); }
+.guide-accordion-header:hover .guide-accordion-headline { color: var(--accent-ink); }
+
+.guide-accordion-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.guide-accordion-headline {
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--text);
+  transition: color 0.15s;
+}
+
+.guide-accordion-chevron {
+  font-size: 0.875rem;
+  color: var(--muted);
+  transition: transform 0.25s, color 0.15s;
+}
+.guide-accordion-item.is-open .guide-accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+.guide-accordion-item.is-open .guide-accordion-num {
+  color: var(--accent);
+}
+
+/* Smooth expand/collapse using the grid-rows 0fr → 1fr trick.
+   Works without a magic max-height fudge value. */
+.guide-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.guide-accordion-item.is-open .guide-accordion-body {
+  grid-template-rows: 1fr;
+}
+.guide-accordion-body-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.guide-accordion-item.is-open .guide-accordion-body-inner {
+  padding-bottom: 1.5rem;
+}
+
+.guide-section-p {
+  margin: 0 0 1rem;
+  font-size: clamp(1rem, 1.3vw, 1.0625rem);
+  line-height: 1.7;
+  color: var(--text);
+}
+.guide-section-p:last-child { margin-bottom: 0; }
+
+.guide-section-h3 {
+  margin: 1.75rem 0 0.75rem;
+  font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  color: var(--text);
+}
+.guide-section-h3:first-child { margin-top: 0; }
+.guide-section-h3 + .guide-section-p { margin-top: 0; }
+
+.guide-section-list {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+  font-size: clamp(1rem, 1.3vw, 1.0625rem);
+  line-height: 1.7;
+  color: var(--text);
+}
+.guide-section-list li { margin-bottom: 0.4rem; }
+.guide-section-list li:last-child { margin-bottom: 0; }
+
+/* Kicker — first 2–3 words of a section's opening paragraph, styled as a
+   small uppercase cyan marker. Signals "section begins here" without the
+   literary feel of a drop cap. Author marks it in content with ((word)). */
+.guide-kicker {
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.95em;
+}
+
+/* Inline cross-link inside guide prose. Subtle accent with hover underline. */
+.guide-inline-link {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 138, 163, 0.35);
+  transition: border-color 0.15s, color 0.15s;
+}
+.guide-inline-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Pull quote — extracted phrase, set apart from the paragraph flow with a
+   cyan vertical bar and italic display weight. Author marks these in the
+   body array as { kind: 'pull-quote', text: '...' }. */
+.guide-section-pullquote {
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  font-size: clamp(1.125rem, 1.7vw, 1.3125rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+
+/* ─── Cross-link strip ──────────────────────────────────────────────────── */
+.crosslink-band {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.crosslink-band .audit-section-head h2 {
+  font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+}
+.crosslink-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin: 2rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+  overflow: hidden;
+}
+@media (min-width: 720px) {
+  .crosslink-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.crosslink-card {
+  display: block;
+  padding: 1.625rem 1.5rem;
+  background: var(--white);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+.crosslink-card:hover { background: var(--bg); }
+.crosslink-eyebrow {
+  margin: 0 0 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.crosslink-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.crosslink-line {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   System access page (/system/<slug>) — buyer-only delivery
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Hero — download button row sits between the sub paragraph and the meta.
+   Two buttons side-by-side on desktop, stacked / wrapping on narrow screens. */
+.system-download-row {
+  margin: 2.25rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.system-download-btn {
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.5rem;
+}
+.system-download-btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* Section bands — Setup tools on canvas, Ongoing toolkit on white. */
+.system-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.system-section-alt {
+  background: var(--white);
+}
+
+/* Tool list — vertical stack with breathing room. */
+.system-tool-list {
+  max-width: var(--prose-w);
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Each tool card: header (number + name + one-liner) above the PromptWindow. */
+.system-tool-card { display: flex; flex-direction: column; gap: 1rem; }
+.system-tool-header { display: flex; flex-direction: column; gap: 0.375rem; }
+.system-tool-num {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.system-tool-name {
+  margin: 0;
+  font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--text);
+}
+.system-tool-line {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* ─── Orientation block ─────────────────────────────────────────────────── */
+.system-orientation {
+  max-width: var(--prose-w);
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.system-orientation-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.system-orientation-block-title {
+  margin: 0;
+  font-size: clamp(1.0625rem, 1.7vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+.system-orientation-ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+.system-orientation-ol li {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text);
+  padding-left: 0.25rem;
+}
+.system-orientation-ol li::marker {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.system-orientation-closing {
+  margin: 0;
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Definition-list pattern: bold title on its own line, then explanation. */
+.system-definition-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+.system-definition-row { margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.system-definition-row dt {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+.system-definition-row dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ─── Video walkthrough callout (inside Phase 3) ────────────────────────── */
+.system-walkthrough {
+  max-width: var(--prose-w);
+  margin: 1.5rem auto 0;
+  padding: 1.25rem 1.5rem;
+  background: rgba(55, 211, 241, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+.system-walkthrough-label {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.system-walkthrough-body {
+  margin: 0 0 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.system-walkthrough-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 138, 163, 0.35);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.system-walkthrough-cta::after { content: '→'; transition: transform 0.15s; }
+.system-walkthrough-cta:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.system-walkthrough-cta:hover::after { transform: translateX(2px); }

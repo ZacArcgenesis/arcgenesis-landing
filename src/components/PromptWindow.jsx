@@ -4,19 +4,20 @@ import { FREE_PROMPT } from '../config/prompt.js'
 /**
  * PromptWindow — the "copy the prompt" code window.
  *
- * Renders the free prompt from config/prompt.js with a working copy button.
- * This is the page's "experience the product before you buy" moment.
+ * Defaults to the Environment Audit (FREE_PROMPT) so the original usage on
+ * the Audit page keeps working without changes. Pass `prompt={...}` to render
+ * any other prompt object that exposes { fileName, body }.
  */
-export default function PromptWindow() {
+export default function PromptWindow({ prompt = FREE_PROMPT }) {
+  const { fileName, body } = prompt
   const [copied, setCopied] = useState(false)
 
   async function copyPrompt() {
     try {
-      await navigator.clipboard.writeText(FREE_PROMPT.body)
+      await navigator.clipboard.writeText(body)
     } catch {
-      // Fallback for older / non-secure contexts.
       const ta = document.createElement('textarea')
-      ta.value = FREE_PROMPT.body
+      ta.value = body
       ta.style.position = 'fixed'
       ta.style.opacity = '0'
       document.body.appendChild(ta)
@@ -34,7 +35,7 @@ export default function PromptWindow() {
         <div className="prompt-dots">
           <span /><span /><span />
         </div>
-        <span className="prompt-filename">{FREE_PROMPT.fileName}</span>
+        <span className="prompt-filename">{fileName}</span>
         <button
           type="button"
           className={`prompt-copy${copied ? ' copied' : ''}`}
@@ -44,7 +45,7 @@ export default function PromptWindow() {
           {copied ? 'Copied' : 'Copy prompt'}
         </button>
       </div>
-      <pre className="prompt-body">{FREE_PROMPT.body}</pre>
+      <pre className="prompt-body">{body}</pre>
     </div>
   )
 }
