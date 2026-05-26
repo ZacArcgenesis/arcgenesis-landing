@@ -23,6 +23,9 @@ export default function FinalCta() {
           <div style={{ marginTop: '2.25rem' }}>
             <a href="#pricing" className="btn-primary">{finalCta.cta}</a>
           </div>
+          {finalCta.sub && (
+            <p className="final-cta-sub">{finalCta.sub}</p>
+          )}
         </div>
       </div>
     </section>

@@ -3,7 +3,8 @@ import { SITE } from '../config/site.js'
 
 /**
  * Pricing — dark band. The offer, one price, the buy button.
- * The buy button points at SITE.checkoutUrl (placeholder until checkout is set up).
+ * The buy button points at SITE.checkoutUrl (the Kit product page) and
+ * carries [data-commerce] so Kit's script opens the checkout as a modal.
  * V2 has no section headline — the price IS the heading.
  */
 export default function Pricing() {
@@ -47,9 +48,11 @@ export default function Pricing() {
               </p>
             )}
 
-            <a href={SITE.checkoutUrl} className="btn-primary btn-full">{pricing.cta}</a>
+            <a href={SITE.checkoutUrl} data-commerce className="btn-primary btn-full">{pricing.cta}</a>
 
-            <p className="pricing-fineprint">{pricing.finePrint}</p>
+            {pricing.finePrint && (
+              <p className="pricing-fineprint">{pricing.finePrint}</p>
+            )}
           </div>
         </div>
       </div>

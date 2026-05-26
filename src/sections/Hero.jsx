@@ -6,7 +6,10 @@ import Highlight from '../components/Highlight.jsx'
 /**
  * Hero — dark band, two columns.
  *
- * Left: copy + two CTAs (try-the-free-tool and get-set-up-for-$97).
+ * Left: copy + two CTAs. ctaPrimary is the filled buy button that scrolls
+ * to the Pricing section; ctaSecondary is the ghost free-tool button that
+ * navigates to /environment-audit. Both stay prominent — the free tool is
+ * the proof, not a competing CTA.
  * Right: a layered stack of five "prompt" cards tilted on an angle. The
  * front card is the free tool (Environment Audit, demonstrated in the
  * FreePrompt section below); the four cards behind it are the four
@@ -65,11 +68,12 @@ export default function Hero() {
             <h1 className="headline-xl on-dark">
               <Highlight text={hero.headline} />
             </h1>
-            <p className="lead on-dark-muted hero-sub">{hero.subhead}</p>
+            <p className="hero-tagline">{hero.subhead}</p>
+            <p className="lead on-dark-muted hero-sub">{hero.body}</p>
 
             <div className="hero-cta-row">
-              <Link to="/environment-audit" className="btn-primary">{hero.ctaPrimary}</Link>
-              <a href="#pricing" className="btn-ghost">{hero.ctaSecondary}</a>
+              <a href="#pricing" className="btn-primary">{hero.ctaPrimary}</a>
+              <Link to="/environment-audit" className="btn-ghost">{hero.ctaSecondary}</Link>
             </div>
 
             <p className="hero-reassurance">{hero.reassurance.join(' · ')}</p>

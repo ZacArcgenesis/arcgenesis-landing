@@ -21,32 +21,30 @@ export const CONTENT = {
     logoSuffix: 'Finance',
     // Inline links between logo and CTA. Each maps to a real route.
     // An item with `children` renders as a hover dropdown on desktop.
+    // (Guides removed temporarily until the guide pages are finished.)
     links: [
-      {
-        label: 'Guides',
-        children: [
-          { label: 'Get Out of Debt', to: '/guides/get-out-of-debt' },
-          { label: 'Save for Something Big', to: '/guides/save-for-something-big' },
-          { label: 'Start Investing', to: '/guides/start-investing' },
-        ],
-      },
       { label: 'Environment Audit', to: '/environment-audit' },
     ],
-    cta: 'Get on the path',
+    cta: 'Build My Plan',
   },
 
   // ── Hero ─────────────────────────────────────────────────────────────────
   hero: {
     headline: 'Every financial goal starts with {{the same step.}}',
+    // Medium-weight one-liner that names the deliverable above the fold.
     subhead:
-      'Buying a home. Paying off debt. Investing. Retiring early. None of it works if you’re spending everything you earn. This system builds the foundation in four hours.',
-    ctaPrimary: 'Try a tool for free',
-    ctaSecondary: 'Get on the path — $97',
+      'A personalized financial plan, built in 4 hours, that keeps working for years.',
+    // Tight body paragraph beneath the subhead — names the goals, the
+    // mechanism, and the permanence in plain terms.
+    body:
+      'Buying a home. Paying off debt. Investing. Retiring early. None of it works if you’re consistently spending everything you earn. This system builds the foundation around your actual income, your actual expenses, and your actual goals — then gives you tools to keep it running as life shifts.',
+    ctaPrimary: 'Build My Plan — $97',
+    ctaSecondary: 'Try the Environment Audit — Free',
     // Joined with ' · ' separators into a single small line beneath the CTAs.
     reassurance: [
       'Works in Claude, ChatGPT, or any AI',
       'One payment',
-      'No subscription',
+      '60-day money-back guarantee',
       'You own everything',
     ],
   },
@@ -55,8 +53,8 @@ export const CONTENT = {
   teach: {
     headline: 'You know where you {{want to go.}} You just can’t get there.',
     body: [
-      'The goal is real. You’ve thought about it. Maybe you’ve even tried a budget or two. But every month the money disappears, the goal stays where it is, and you’re back to hoping next month is different.',
-      'Here’s what most people miss: it doesn’t matter how good your investment strategy is if you don’t have money to invest. It doesn’t matter how much you know about real estate if you can’t save for the down payment. Every financial goal sits on top of the same foundation: consistently having more coming in than going out. That’s what this builds.',
+      'You have the goal. You’ve probably thought about it for years. Maybe you’ve even tried working toward it before. Buying a house, paying off debt, starting to invest, saving for a vacation, or whatever. But every month the money disappears, you stay exactly where you are, and the goal continues to stay out of reach.',
+      'And it will continue to stay out of reach unless you change this one thing. It doesn’t matter how good your investment strategy is if you don’t have money to invest. It doesn’t matter how much you know about real estate if you can’t save for the down payment. It doesn’t matter how many videos on getting out of debt you watch. Every financial goal sits on top of the same foundation: consistently having more coming in than going out. Without it, you won’t make any progress. This system was built to help you do just that: start making progress.',
     ],
   },
 
@@ -66,9 +64,24 @@ export const CONTENT = {
   freePrompt: {
     headline: 'Try it before you {{decide anything.}}',
     intro:
-      'The Environment Audit is one of the ten tools in the full system, free to run. It maps the specific forces in your life that are designed to get you to spend, and hands you a short list of things you can change today.',
+      'Don’t take our word for any of this. One of the ten tools from the full system is free to run. Get a personalized result and decide for yourself.',
     ctaLabel: 'Try the Environment Audit',
     ctaSub: 'No account. No email. Takes about fifteen minutes.',
+    // Sample slice of the actual Environment Audit output, rendered as a
+    // mock saved markdown document. Swap with a real anonymized customer
+    // output once one is available.
+    example: {
+      fileName: 'environment-audit.md',
+      glanceHeading: 'Your Environment at a Glance',
+      glance:
+        'The biggest pressure on your spending is one-click checkout across 8+ retailers, late-evening DoorDash use, and lifestyle accounts on Instagram driving "I want that" reactions.',
+      changesHeading: 'Highest-Impact Changes',
+      changes: [
+        'Remove every saved card, including Amazon. The 30-second friction of typing in a card breaks most impulse purchases.',
+        'Move DoorDash off your home screen. The 10pm tired-ordering pattern is your biggest discretionary spend right now.',
+        'Set a 30-minute daily limit on Instagram. The accounts you follow are making you want to buy things you weren’t planning to.',
+      ],
+    },
   },
 
   // ── Environment Audit page (its own route at /environment-audit) ────────
@@ -754,10 +767,9 @@ export const CONTENT = {
       'Every prompt, ready for any AI',
       'The roadmap that ties it all together',
     ],
-    cta: 'Get on the path',
-    finePrint: 'If a creator sent you here, use their code at checkout.',
-    // PLACEHOLDER — add a guarantee here if you decide to offer one.
-    guarantee: null,
+    cta: 'Build My Plan',
+    finePrint: null,
+    guarantee: '60-day money-back guarantee. No questions, no forms.',
   },
 
   // ── Price math (the ROI argument right after the offer) ─────────────────
@@ -795,8 +807,20 @@ export const CONTENT = {
         a: 'No. One payment, keep everything forever.',
       },
       {
-        q: 'I was sent here by a creator I trust, but I don’t know you.',
-        a: 'That’s why there’s a free tool at the top of this page. Run it and see what it produces. If it’s useful, the rest is built with the same care.',
+        q: 'What if my income is irregular?',
+        a: 'The system is built around your actual numbers, whatever they are. The setup asks you about income variability directly and builds the budget to flex with it. Freelancers and gig workers get a different working budget than someone with a steady paycheck — same tools, different output.',
+      },
+      {
+        q: 'What if I’m already deep in debt — will this still work?',
+        a: 'Yes. The system doesn’t assume you’re starting from zero. It maps your real situation, including debt, and builds the plan from there. Several of the tools — especially the budget and the launch plan — are designed to give debt payoff a real place in the picture instead of treating it like an afterthought.',
+      },
+      {
+        q: 'How is this different from a budgeting app like YNAB or Mint?',
+        a: 'Apps track. This builds. YNAB and Mint show you what happened with your money. This system helps you decide what you want to happen, names what’s been pushing you off course, and gives you a plan to move toward your goals. You can use both — they do different jobs.',
+      },
+      {
+        q: 'What if it doesn’t work for me?',
+        a: 'Full refund within 60 days. No questions, no forms. If you build the plan and don’t think it’s worth what you paid, you get every dollar back.',
       },
     ],
   },
@@ -805,7 +829,8 @@ export const CONTENT = {
   finalCta: {
     headline: 'Four hours to be on {{the path.}}',
     body: 'You already tried one of the tools. The full system is the rest of that: the setup that gets you moving and the tools that keep you moving. Four hours from now, you’ll know exactly where you are, where you’re going, and what’s next.',
-    cta: 'Get on the path',
+    cta: 'Build My Plan — $97',
+    sub: '60-day money-back guarantee',
   },
 
   // ── Footer ───────────────────────────────────────────────────────────────

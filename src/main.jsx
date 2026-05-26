@@ -33,6 +33,19 @@ function ScrollOnNavigate() {
   return null
 }
 
+// On a hard reload, drop any in-page hash (e.g. #pricing) before React
+// mounts so the page starts at the top instead of restoring the last
+// clicked anchor. Cross-page anchor navigation (e.g. /#pricing from the
+// Environment Audit page) still works because that's not a "reload".
+const navEntry = performance.getEntriesByType('navigation')[0]
+if (navEntry?.type === 'reload' && window.location.hash) {
+  window.history.replaceState(
+    null,
+    '',
+    window.location.pathname + window.location.search,
+  )
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

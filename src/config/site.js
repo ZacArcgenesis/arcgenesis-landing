@@ -11,9 +11,7 @@ export const SITE = {
   productNameFull: 'The 4 Hours to Financial Confidence System',
 
   // ── Pricing ──────────────────────────────────────────────────────────────
-  // Anchor price the page shows. Creator coupon codes (handled inside your
-  // checkout platform) discount this — the page itself never needs to know
-  // about individual codes.
+  // Anchor price the page shows.
   price: 97,
   currency: 'USD',
   currencySymbol: '$',
@@ -21,10 +19,11 @@ export const SITE = {
   anchorPrice: null,
 
   // ── Checkout ─────────────────────────────────────────────────────────────
-  // PLACEHOLDER. Swap this for your real checkout URL once the product is set
-  // up (Lemon Squeezy / Stripe / etc). Every "Buy" button on the page points
-  // here. The "#" keeps it harmless until then.
-  checkoutUrl: '#checkout-not-set-up-yet',
+  // Kit Commerce product URL. The buy button in Pricing.jsx carries
+  // [data-commerce], so the Kit script (loaded in index.html) intercepts
+  // the click and opens the checkout in a modal instead of navigating.
+  // Visitors with JS disabled fall through to this URL as a normal link.
+  checkoutUrl: 'https://arcgenesis-finance.kit.com/products/four-hours-to-financial-confidence',
 
   // ── Free prompt ──────────────────────────────────────────────────────────
   // The actual prompt text lives in ./prompt.js — this is just metadata.

@@ -12,10 +12,9 @@ tools produce.
 ## Page
 
 A single long-form sales page, **mobile-first** (most traffic is mobile).
-Traffic comes from YouTube creator links — the visitor is warm but skeptical:
-they trust the creator who sent them, not ArcGenesis yet. The page earns trust
-by teaching something real, lets the visitor experience the product through a
-free prompt, then makes buying the obvious next step.
+Visitors arrive warm but skeptical — they need to earn trust before buying.
+The page earns trust by teaching something real, lets the visitor experience
+the product through a free prompt, then makes buying the obvious next step.
 
 ## Stack
 
@@ -48,18 +47,13 @@ The `{{double-brace}}` markers in headlines render in the accent color via the
 - Font: Syne for headlines, Inter for body
 - Dark bands carry a subtle CSS grid texture (`.grid-texture`, no image asset)
 
-## Creator attribution
-
-Each YouTube creator gets a **coupon code**, created and tracked inside the
-checkout platform — NOT in this codebase. There are **no per-creator page
-variations, no admin panel, and no backend.** The page is fully static.
-
 ## Checkout
 
-Not set up yet. `SITE.checkoutUrl` in `src/config/site.js` is a placeholder
-(`#`). Every "Buy" button points there — swap it for the real checkout URL
-once the product is live. Leading candidate: Lemon Squeezy (built-in affiliate
-program for creator payouts); Stripe is the lower-fee alternative.
+Kit Commerce. The product URL lives in `SITE.checkoutUrl` (`src/config/site.js`)
+and the Kit script is loaded in `index.html`. The buy button in
+`src/sections/Pricing.jsx` carries `data-commerce`, so Kit's script intercepts
+the click and opens the checkout in a modal over the page. The page itself
+stays fully static — no backend, no admin panel.
 
 ## Legacy
 

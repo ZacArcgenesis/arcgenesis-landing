@@ -158,6 +158,17 @@ img { max-width: 100%; display: block; }
    keep their 400 weight. */
 .hero-sub { font-weight: 300; }
 
+/* Hero tagline — the medium-weight value-prop line between the headline and
+   the body paragraph. Sized between headline-xl and the lead body. */
+.hero-tagline {
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: rgba(255, 255, 255, 0.88);
+}
+
 .accent { color: var(--accent); }
 
 .accent-bar {
@@ -255,6 +266,9 @@ img { max-width: 100%; display: block; }
 }
 .navbar-mark { height: 34px; width: auto; }
 .navbar-logo-text {
+  /* Hidden on mobile to give the link + CTA enough room. The A-mark icon
+     alone stands in for the brand at small widths. */
+  display: none;
   font-weight: 600;
   font-size: 0.9375rem;
   letter-spacing: 0.08em;
@@ -262,6 +276,9 @@ img { max-width: 100%; display: block; }
   /* Tuck the wordmark against the "A" logo mark. Nudge this value if the
      gap looks off — it depends on the transparent padding in logo-mark.png. */
   margin-left: -6px;
+}
+@media (min-width: 640px) {
+  .navbar-logo-text { display: inline; }
 }
 .navbar-logo-suffix {
   font-weight: 400;
@@ -272,24 +289,53 @@ img { max-width: 100%; display: block; }
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-}
-.navbar-link {
-  display: none;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 0.8125rem;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.15s;
+  gap: 0.5rem;
 }
 @media (min-width: 640px) {
-  .navbar-link { display: inline-flex; align-items: center; }
+  .navbar-right { gap: 1.25rem; }
 }
-.navbar-link:hover { color: var(--white); }
+.navbar-link {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.4375rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+@media (min-width: 640px) {
+  .navbar-link {
+    font-size: 0.875rem;
+    padding: 0.4375rem 0.75rem;
+  }
+}
+.navbar-link:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+}
 .navbar-link.is-active { color: var(--accent); }
+.navbar-link.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.125rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+@media (min-width: 640px) {
+  .navbar-link.is-active::after {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+}
 
 /* Dropdown wrapper — relative anchor for the absolute panel. */
 .navbar-dropdown {
@@ -303,8 +349,7 @@ img { max-width: 100%; display: block; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  /* inherits .navbar-link visual styling */
+  /* inherits .navbar-link padding + visual styling */
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -1501,3 +1546,66 @@ img { max-width: 100%; display: block; }
   border-bottom-color: var(--accent);
 }
 .system-walkthrough-cta:hover::after { transform: translateX(2px); }
+
+/* Small italic reassurance line beneath the FinalCta close button. */
+.final-cta-sub {
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+/* ─── Audit sample (FreePrompt) ──────────────────────────────────────────── */
+/* Rendered to look like a saved markdown document — white "page" with a
+   filename header, hierarchy of in-doc headings, and a numbered list. Sits
+   on the FreePrompt dark band so the white card pops as a tangible artifact. */
+.audit-sample {
+  max-width: 640px;
+  margin: 2.75rem auto 0;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--white);
+  color: var(--text);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 48px rgba(0, 0, 0, 0.32);
+  text-align: left;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+.audit-sample-file {
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.audit-sample h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--text);
+}
+.audit-sample h4 + p,
+.audit-sample h4 + ol { margin-top: 0; }
+.audit-sample p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+.audit-sample > p + h4,
+.audit-sample > ol + h4 { margin-top: 1.5rem; }
+.audit-sample ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: decimal;
+  font-size: 0.9375rem;
+}
+.audit-sample ol li {
+  margin-top: 0.75rem;
+  padding-left: 0.25rem;
+}
+.audit-sample ol li:first-child { margin-top: 0; }
