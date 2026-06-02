@@ -192,6 +192,8 @@ The four weeks follow a natural progression: setup, first run, settle in, review
 
 **Week 1: Setup.** This is the heaviest week. Everything that needs to happen before the budget is actually running. The specific tasks depend on what's in their documents:
 
+**Make the Goal Contribution move first, before anything else. This is just the action version of "fund your financial force first," which they already learned.** They've decided the amount. Now make it concrete: every payday, the Goal Contribution comes out before they spend a dollar. The most reliable way to hold that order is to automate it, an automatic transfer timed to payday, sending each part to wherever it goes (savings, investments, extra debt payment, or a holding account). Automating means the order can't quietly break on a busy month. If they'd rather move it by hand each payday, the way the budgeting video shows with the holding account, that's fine too, as long as it's the first move and not the leftover. Don't frame this as overriding their tracking method. Their app, spreadsheet, or envelopes are how they watch spending. This just makes sure the goal money leaves first.
+
 From the budget's implementation method:
 
 - If separate accounts: open the second checking account, set up automatic transfers (specify amounts from their budget), move the spending money
@@ -222,7 +224,7 @@ General setup tasks:
 - If their Primary Causes Diagnostic is available, include a "watch for" note tied to their active causes. Something like: "Your Primary Causes Diagnostic flagged the Not Enough Apples pattern. This week, before you buy something, check your available balance in your spending account (not your full bank balance). That one habit directly counters this cause."
 - Note that the first week will feel unfamiliar. That's normal. The goal isn't perfection. It's awareness.
 
-**Week 3: Settling in.** The novelty is wearing off. This is where most people either start to feel comfortable or start to slip.
+**Week 3: Settling in.** The novelty is wearing off. This is where most people either start to feel comfortable or start to slip. Because this is the slip week, include a short, direct note that names the slip before it happens and points them to the "When You Slip" section of their plan. Something like: *"If you slip this week, and a lot of people do right around now, don't read it as failure and don't go quiet on your budget. That avoidance is what actually sinks people, not the slip itself. Look at what happened, adjust if you need to, and keep going. There's more on this in 'When You Slip' at the end of your plan."*
 
 - Continue tracking.
 - At the weekly check-in: look at the month so far. Are any categories running hot? Is the Goal Contribution still going out on schedule?
@@ -271,6 +273,7 @@ Produce the output as a markdown document the user can save. Use this structure:
 **Goal for this week:** Get everything in place so your budget is live and running by the end of the week.
 
 **Implementation setup:**
+- Make your Goal Contribution leave first, before you spend a thing. Easiest way: an automatic transfer on payday, split across your goals ([their goals from the budget]). Prefer to move it by hand each payday like the holding-account method? That works too, as long as it's the first move, not what's left at the end.
 - [Specific task based on their method]
 - [Specific task based on their method]
 - [Specific task based on their method]
@@ -307,6 +310,7 @@ Produce the output as a markdown document the user can save. Use this structure:
 
 **Goal for this week:** Keep going. Notice what's working and what's not. Write down anything that feels off, but don't change the targets yet.
 
+- Heads up: this is the week a lot of people slip. If you do, don't go quiet on your budget. That avoidance is what actually sinks people, not the slip itself. Look at what happened, adjust if you need to, and keep going. (See "When You Slip" below.)
 - Continue tracking spending in [their method].
 - [If Primary Causes available: another "watch for" reminder, different from week 2]
 - [If partner: Brief check-in with your partner. How's it feeling for both of you?]
@@ -333,6 +337,16 @@ Produce the output as a markdown document the user can save. Use this structure:
 
 ---
 
+## When You Slip
+
+You're going to mess up. Not if. When. You'll blow a category, skip a week of tracking, or have a month where the whole thing falls apart. That isn't a sign you failed. It's just how this goes, for everyone who's ever done it.
+
+The only thing that actually matters is what you do next. You don't quit. You pick it back up, adjust whatever needs adjusting, and keep going. If something big knocked you off course, the Plan Recalibrator can help you rebuild from where you actually are.
+
+The people who get where they want to go with their money aren't the ones who never slip. They're the ones who slipped, shook it off, and kept moving. Failure isn't messing up. Failure is deciding to stop.
+
+---
+
 ## What Comes Next
 
 **Monthly:** Run the Monthly Financial Force Review tool to produce an updated snapshot and track your progress. This is your ongoing practice.
@@ -352,6 +366,6 @@ After delivering the plan, briefly tell the user three things:
 
 1. What they're holding. A specific, week-by-week plan for getting their budget live and running through the first month. Not a vague "go do it." A sequence of concrete steps they can follow.
 2. What to do right now. Look at Week 1. Pick the first task on the list. Do it today or tomorrow. The hardest part of any plan is the first action. Once that's done, the rest follows more easily.
-3. That imperfection is expected. Their first month won't go perfectly. Some targets will be off. Some weeks will be messy. That's not failure. That's data. The end-of-month review is specifically designed to catch what needs adjusting. The only way to fail at this is to stop.
+3. That slipping is expected, and it isn't failure. Their first month won't go perfectly. Some targets will be off, some weeks will be messy, and there's a real chance they overspend or fall off the tracking entirely at some point. That's not failure. That's normal, and the plan is built to absorb it. Point them to the "When You Slip" section in their plan and make the one idea stick: the only way to actually fail at this is to quit. Slipping and getting back up is the whole game.
 
 End warmly. They've just completed the full setup of the system. Four phases, done. They have their goals, their snapshot, their diagnoses, their budget, and now their launch plan. That's more financial clarity than most people ever build. They should feel good about what they've put together.
