@@ -766,6 +766,7 @@ export const CONTENT = {
       'Video walkthrough of a real budget being built',
       'Every prompt, ready for any AI',
       'The roadmap that ties it all together',
+      'Free updates for life — we email you whenever the product improves',
     ],
     cta: 'Build My Plan',
     finePrint: null,
