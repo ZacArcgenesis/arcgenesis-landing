@@ -44,7 +44,7 @@ export const CONTENT = {
     reassurance: [
       'Works in Claude, ChatGPT, or any AI',
       'One payment',
-      '60-day money-back guarantee',
+      '30-day money-back guarantee',
       'You own everything',
     ],
   },
@@ -874,7 +874,7 @@ export const CONTENT = {
     ],
     cta: 'Build My Plan',
     finePrint: null,
-    guarantee: '60-day money-back guarantee. No questions, no forms.',
+    guarantee: '30-day money-back guarantee. No questions, no forms.',
   },
 
   // ── Price math (the ROI argument right after the offer) ─────────────────
@@ -925,7 +925,7 @@ export const CONTENT = {
       },
       {
         q: 'What if it doesn’t work for me?',
-        a: 'Full refund within 60 days. No questions, no forms. If you build the plan and don’t think it’s worth what you paid, you get every dollar back.',
+        a: 'Full refund within 30 days. No questions, no forms. If you build the plan and don’t think it’s worth what you paid, you get every dollar back.',
       },
     ],
   },
@@ -967,12 +967,12 @@ export const CONTENT = {
     headline: 'Four hours to be on {{the path.}}',
     body: 'You already tried one of the tools. The full system is the rest of that: the setup that gets you moving and the tools that keep you moving. Four hours from now, you’ll know exactly where you are, where you’re going, and what’s next.',
     cta: 'Build My Plan — $97',
-    sub: '60-day money-back guarantee',
+    sub: '30-day money-back guarantee',
   },
 
   // ── Legal pages (/terms and /privacy) ────────────────────────────────────
   // TEMPLATE LANGUAGE, NOT LEGAL ADVICE. Drafted in plain language to cover
-  // the digital product, the 60-day guarantee, Kit email + Kit Commerce
+  // the digital product, the 30-day guarantee, Kit email + Kit Commerce
   // checkout, and analytics. Zac should review (and ideally have a lawyer
   // look at) both pages before relying on them.
   legal: {
@@ -995,9 +995,9 @@ export const CONTENT = {
           ],
         },
         {
-          heading: '60-day money-back guarantee',
+          heading: '30-day money-back guarantee',
           body: [
-            'If you buy the system and decide within 60 days that it wasn’t worth what you paid, email us and you get a full refund. No questions, no forms. The support address is at the bottom of every page.',
+            'If you buy the system and decide within 30 days that it wasn’t worth what you paid, email us and you get a full refund. No questions, no forms. The support address is at the bottom of every page.',
           ],
         },
         {
