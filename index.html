@@ -20,13 +20,46 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arcgenesisfinance.com/" />
     <meta property="og:title" content="4 Hours to Financial Confidence — ArcGenesis Finance" />
     <meta
       property="og:description"
       content="A guided AI setup plus a permanent toolkit, built to do one thing: get you consistently spending less than you earn."
     />
+    <meta property="og:image" content="https://arcgenesisfinance.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="4 Hours to Financial Confidence — ArcGenesis Finance" />
+    <meta
+      name="twitter:description"
+      content="A guided AI setup plus a permanent toolkit, built to do one thing: get you consistently spending less than you earn."
+    />
+    <meta name="twitter:image" content="https://arcgenesisfinance.com/og-image.png" />
 
     <title>ArcGenesis Finance</title>
+
+    <!-- Plausible analytics (privacy-friendly, no cookie banner needed).
+         data-domain is the Plausible site ID — confirm it matches the site
+         added in the Plausible dashboard. Swapping to GA4 instead is a
+         one-script change here; the custom events flow through
+         src/lib/analytics.js either way. The inline stub queues events
+         fired before the script finishes loading.
+         The exclusions build + data-exclude keeps the buyer-only /system/
+         pages out of analytics entirely, so the private URL never reaches
+         the Plausible dashboard (and can't leak if a public dashboard is
+         ever enabled). -->
+    <script
+      defer
+      data-domain="arcgenesisfinance.com"
+      data-exclude="/system/*"
+      src="https://plausible.io/js/script.exclusions.js"
+    ></script>
+    <script>
+      window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }
+    </script>
 
     <!-- Kit commerce: intercepts clicks on [data-commerce] links and
          opens the product's checkout in a modal over the page. -->

@@ -50,12 +50,88 @@ export const CONTENT = {
   },
 
   // ── Problem ──────────────────────────────────────────────────────────────
+  // Body renders via ProseBlocks: strings are paragraphs (with **bold**
+  // landing points for scanners), { kind: 'pull-quote' } blocks render as
+  // the cyan-bar pull quote. Same voice-reviewed words as before — only the
+  // paragraph breaks and emphasis changed for readability.
   teach: {
     headline: 'You know where you {{want to go.}} You just can’t get there.',
     body: [
-      'You have the goal. You’ve probably thought about it for years. Maybe you’ve even tried working toward it before. Buying a house, paying off debt, starting to invest, saving for a vacation, or whatever. But every month the money disappears, you stay exactly where you are, and the goal continues to stay out of reach.',
-      'And it will continue to stay out of reach unless you change this one thing. It doesn’t matter how good your investment strategy is if you don’t have money to invest. It doesn’t matter how much you know about real estate if you can’t save for the down payment. It doesn’t matter how many videos on getting out of debt you watch. Every financial goal sits on top of the same foundation: consistently having more coming in than going out. Without it, you won’t make any progress. This system was built to help you do just that: start making progress.',
+      'You have the goal. You’ve probably thought about it for years. Maybe you’ve even tried working toward it before. Buying a house, paying off debt, starting to invest, saving for a vacation, or whatever.',
+      'But every month the money disappears, you stay exactly where you are, and **the goal continues to stay out of reach.**',
+      'And it will continue to stay out of reach unless you change this one thing. It doesn’t matter how good your investment strategy is if you don’t have money to invest. It doesn’t matter how much you know about real estate if you can’t save for the down payment. It doesn’t matter how many videos on getting out of debt you watch.',
+      'Every financial goal sits on top of the same foundation: **consistently having more coming in than going out.** Without it, you won’t make any progress. This system was built to help you do just that: start making progress.',
+      'And here’s the part nobody tells you. The reason you’re stuck was never a lack of willpower. **Your environment is not neutral.** One-click checkout, saved cards everywhere, notifications timed for when you’re tired, a feed full of things to want.',
+      'The whole thing is built to move money out of your pocket, and **it’s working exactly as designed.** You’ve been white-knuckling it against a system that was engineered to win.',
+      {
+        kind: 'pull-quote',
+        text: 'It was never willpower. It’s architecture.',
+      },
+      'And architecture can be changed.',
     ],
+  },
+
+  // ── Guide (founder / credibility — photo + story) ────────────────────────
+  // Same ProseBlocks rendering as teach.body: short chunks, one bold per
+  // chunk, one pull quote. Words unchanged from the voice-reviewed copy.
+  guide: {
+    headline: 'Built by {{someone who needed it.}}',
+    body: [
+      'I spent years studying how to build wealth. Books, seminars, investing strategies. I could explain half a dozen paths to financial freedom from memory.',
+      'Then a friend asked me to help him make a budget, and I had to admit something kind of embarrassing: **I didn’t have one.**',
+      {
+        kind: 'pull-quote',
+        text: 'All that knowledge, and I had implemented none of it.',
+      },
+      'Because at the end of every month, there was never anything left over to implement it with. That was the moment I realized I had skipped the step that everything else sits on: **consistently having more money coming in than going out.** No strategy works without it. So I decided to actually figure that out.',
+      'I started by taking ten days and reading ten books on money management. A book a day. Dave Ramsey, Ramit Sethi, Tony Robbins, the YNAB book, The Financial Diet, even Ray Dalio’s Principles. And honestly? Not one of them fit my life on its own.',
+      'So I pulled out the pieces that worked, left out what didn’t, and **built my own way of running my money.** A clear picture of where it was going, what was pushing me to spend, a budget that fit my actual life, and a way to keep the whole thing running when life got messy.',
+      'Then I spent years refining it, keeping what worked and cutting what didn’t. **That’s the system on this page.** It’s how I run my money today, and the setup builds yours the same way I built mine: around your real life, your real numbers, and your real goals instead of somebody else’s template.',
+    ],
+    attribution: 'Zac Bradshaw, ArcGenesis Finance',
+    // Photo alt text for /zac.webp (the image itself lives in public/).
+    photoAlt: 'Zac Bradshaw',
+  },
+
+  // ── Plan (compact three-step strip — the simple path) ───────────────────
+  plan: {
+    headline: 'Here’s how it works.',
+    steps: [
+      {
+        title: 'Run the four-hour setup.',
+        body: 'A guided conversation with the AI you already use. It names your goals, maps your real numbers, and builds a budget that fits your actual life.',
+      },
+      {
+        title: 'Follow your 30-day launch plan.',
+        body: 'Week-by-week steps, built from your setup, that get the system running in your real life.',
+      },
+      {
+        title: 'Check one number each month.',
+        body: 'Fifteen minutes. Did you move forward or backward? Adjust and keep going.',
+      },
+    ],
+  },
+
+  // ── ForWho (qualify the person right before the ask) ────────────────────
+  forWho: {
+    headline: 'Who this is {{actually for.}}',
+    forYou: {
+      title: 'This is for you if:',
+      items: [
+        'You have a goal that’s stayed out of reach for years, and every month the money just disappears.',
+        'You’ve tried budgets before and they didn’t stick.',
+        'You can’t say exactly where your money goes, and that bothers you.',
+        'You want a plan built around your actual life, not a template you have to force yourself into.',
+      ],
+    },
+    notForYou: {
+      title: 'This is not for you if:',
+      items: [
+        'You already consistently spend less than you earn and put money toward your goals every month. Genuinely, you don’t need this. Go invest.',
+        'You’re looking for investment picks, side hustles, or a way to get rich fast. That’s not what this is.',
+        'You want an app that tracks everything automatically. This is a system you build and own, not software that watches your accounts.',
+      ],
+    },
   },
 
   // ── Free prompt CTA (the prompt itself lives on its own page now) ───────
@@ -64,7 +140,7 @@ export const CONTENT = {
   freePrompt: {
     headline: 'Try it before you {{decide anything.}}',
     intro:
-      'Don’t take our word for any of this. One of the ten tools from the full system is free to run. Get a personalized result and decide for yourself.',
+      'Don’t take our word for any of this. One of the eleven tools from the full system is free to run. Get a personalized result and decide for yourself.',
     ctaLabel: 'Try the Environment Audit',
     ctaSub: 'No account. No email. Takes about fifteen minutes.',
     // Sample slice of the actual Environment Audit output, rendered as a
@@ -87,6 +163,32 @@ export const CONTENT = {
   // ── Environment Audit page (its own route at /environment-audit) ────────
   // Designed as a standalone lead-magnet experience — own hero, prompt, and
   // handoff CTA back to the main system at /#pricing.
+  // Stripped-down opt-in the Environment Audit links to once a visitor
+  // finishes the audit. Warm traffic, so it's just the offer and the form.
+  deepDivePage: {
+    headline: 'The Environment Deep-Dive',
+    sub: 'A free 5-day email course on the forces shaping how you spend.',
+    firstNamePlaceholder: 'First name',
+    emailPlaceholder: 'Email address',
+    // Matches the audit-page opt-in button: same sequence, same words at
+    // both doors. Deliberately not "course" framing.
+    cta: 'Send me the Deep-Dive',
+    pendingNote:
+      'The Deep-Dive isn’t live just yet. Check back soon and you’ll be first in line.',
+  },
+
+  // Success page the Deep-Dive form lands on after a successful subscribe.
+  // Same stripped style as the opt-in. One job: get them to find the email
+  // (and rescue it from spam if needed).
+  deepDiveThanksPage: {
+    headline: 'Check your inbox.',
+    body: [
+      'All set. The first Deep-Dive is on its way from zac@arcgenesisfinance.com.',
+      'If it isn’t there within a few minutes, check your spam or promotions folder. Moving it to your inbox tells your email app where the rest of the week belongs.',
+    ],
+    homeLink: 'Back to the home page',
+  },
+
   environmentAuditPage: {
     eyebrow: 'Free tool',
     headline: 'The {{Environment Audit.}}',
@@ -149,7 +251,7 @@ export const CONTENT = {
       },
       {
         q: 'How does this connect to the full system?',
-        a: 'The Environment Audit is one of ten tools in the full $97 system. Running it for free does the audit in full. Nothing held back. If you buy the system later, the AI uses the document you produced today to calibrate your budget and your 30-day launch plan. The work you do here gets used.',
+        a: 'The Environment Audit is one of eleven tools in the full $97 system. Running it for free does the audit in full. Nothing held back. If you buy the system later, the AI uses the document you produced today to calibrate your budget and your 30-day launch plan. The work you do here gets used.',
       },
     ],
 
@@ -169,8 +271,8 @@ export const CONTENT = {
     heroEyebrow: 'The 4 Hours to Financial Confidence System',
     heroHeadline: 'Welcome. Here’s your {{system.}}',
     heroSub:
-      'Ten tools, organized into four setup phases plus an ongoing toolkit. Each tool is a prompt you copy into ChatGPT, Claude, or any AI. Use the phases in order for the four-hour guided setup, then keep the ongoing toolkit for as long as you need it.',
-    heroMeta: '10 tools · 4 setup phases · Yours forever',
+      'Eleven tools, organized into four setup phases plus an ongoing toolkit. Each tool is a prompt you copy into ChatGPT, Claude, or any AI. Use the phases in order for the four-hour guided setup, then keep the ongoing toolkit for as long as you need it.',
+    heroMeta: '11 tools · 4 setup phases · Yours forever',
     downloadLabel: 'Download all (.zip)',
     downloadingLabel: 'Building your zip…',
     downloadedLabel: 'Downloaded',
@@ -238,7 +340,7 @@ export const CONTENT = {
     walkthrough: {
       label: 'Video walkthrough',
       body:
-        'After you’ve built your budget, watch a real example of how one person set up and runs theirs day to day. The terminology is slightly different in places (it was recorded before this system existed), but the method itself is exactly what the Budget Builder covers.',
+        'Before you do your setup steps, watch this. It’s a real example of someone setting up and running their budget day to day. The wording is a little different in places (it was recorded before this system existed), but the method is exactly what you just built. Seeing it run makes your own setup faster.',
       cta: 'Watch the walkthrough',
       // PLACEHOLDER. Swap for the real video URL when you have it.
       url: '#walkthrough-url-pending',
@@ -248,7 +350,7 @@ export const CONTENT = {
     ongoingEyebrow: 'Ongoing toolkit',
     ongoingHeadline: 'Your permanent tools.',
     ongoingDescription:
-      'Use these as needed after the setup is in place. The Monthly Financial Force Review is the only one with a regular cadence; the rest are pull-when-you-need-them tools.',
+      'These five aren’t steps, so don’t run them now. Only one runs on a schedule. The rest wait until the situation calls for them. This is the part you keep forever.',
   },
 
   // ── Pillar guides (long-form, each with an embedded prompt at the end) ──
@@ -693,13 +795,15 @@ export const CONTENT = {
         line: 'Why the math feels stuck, and the four-step way through.',
         to: '/guides/get-out-of-debt',
       },
-      {
-        kind: 'guide',
-        eyebrow: 'Guide',
-        title: 'Save for Something Big',
-        line: 'Flip the order of operations. See the gap. Close it.',
-        to: '/guides/save-for-something-big',
-      },
+      // Hidden until the "Save for Something Big" guide is written (its body
+      // is still TODO stubs). Restore this card when the guide goes live.
+      // {
+      //   kind: 'guide',
+      //   eyebrow: 'Guide',
+      //   title: 'Save for Something Big',
+      //   line: 'Flip the order of operations. See the gap. Close it.',
+      //   to: '/guides/save-for-something-big',
+      // },
       {
         kind: 'guide',
         eyebrow: 'Guide',
@@ -761,7 +865,7 @@ export const CONTENT = {
     priceLine: 'One payment. Lifetime access.',
     includes: [
       'Full four-hour guided setup (six tools)',
-      'Four ongoing tools you keep permanently',
+      'Five ongoing tools you keep permanently',
       'Personalized 30-day launch plan',
       'Video walkthrough of a real budget being built',
       'Every prompt, ready for any AI',
@@ -801,7 +905,7 @@ export const CONTENT = {
       },
       {
         q: 'What do I walk away with?',
-        a: 'Six foundational documents from the setup (goals, snapshot, environment audit, spending patterns, budget, launch plan) plus four ongoing tools you keep permanently. Everything is yours.',
+        a: 'Six foundational documents from the setup (goals, snapshot, environment audit, spending patterns, budget, launch plan) plus five ongoing tools you keep permanently. Everything is yours.',
       },
       {
         q: 'Does it expire?',
@@ -826,12 +930,166 @@ export const CONTENT = {
     ],
   },
 
+  // ── Email capture (inline Kit opt-in blocks) ────────────────────────────
+  // Rendered by the EmailCapture component at the end of each live guide.
+  // The form posts to SITE.kitFormAction.
+  //
+  // NOTE: the `audit` block below is currently unused — the audit page's
+  // inline form was removed in favor of sending finishers to the dedicated
+  // opt-in at /environment-deep-dive. Kept here in case it comes back.
+  emailCapture: {
+    audit: {
+      headline: 'Want help making the changes stick?',
+      body:
+        'The audit hands you the map. Following through is the harder part. Drop your email and I’ll send you the Environment Deep-Dive: five short emails, one a day, each going deeper on one source of pressure and how to handle it. It pairs with the reset plan your audit just gave you. Free, and you can unsubscribe anytime.',
+      button: 'Send me the Deep-Dive',
+      finePrint: 'No spam. Unsubscribe in one click.',
+      emailPlaceholder: 'Email address',
+      success: 'Check your inbox. The first email is on its way.',
+      pendingNote:
+        'The Deep-Dive isn’t live just yet. Check back soon and you’ll be first in line.',
+    },
+    guides: {
+      headline: 'Get the next one.',
+      body:
+        'I write these guides the way I’d explain things to a friend: the full reasoning, no fluff. Drop your email and I’ll send you new guides and tools as I finish them, plus the Environment Deep-Dive series to start.',
+      button: 'Send them my way',
+      finePrint: 'No spam. Unsubscribe in one click.',
+      emailPlaceholder: 'Email address',
+      success: 'You’re in. New guides will land in your inbox as they’re finished.',
+      pendingNote:
+        'The list isn’t live just yet. Check back soon and you’ll be first in line.',
+    },
+  },
+
   // ── Final CTA ────────────────────────────────────────────────────────────
   finalCta: {
     headline: 'Four hours to be on {{the path.}}',
     body: 'You already tried one of the tools. The full system is the rest of that: the setup that gets you moving and the tools that keep you moving. Four hours from now, you’ll know exactly where you are, where you’re going, and what’s next.',
     cta: 'Build My Plan — $97',
     sub: '60-day money-back guarantee',
+  },
+
+  // ── Legal pages (/terms and /privacy) ────────────────────────────────────
+  // TEMPLATE LANGUAGE, NOT LEGAL ADVICE. Drafted in plain language to cover
+  // the digital product, the 60-day guarantee, Kit email + Kit Commerce
+  // checkout, and analytics. Zac should review (and ideally have a lawyer
+  // look at) both pages before relying on them.
+  legal: {
+    terms: {
+      title: 'Terms of Service',
+      updated: 'Last updated: June 2026',
+      sections: [
+        {
+          heading: 'What you’re buying',
+          body: [
+            'The 4 Hours to Financial Confidence System is a digital product sold by ArcGenesis Finance. It includes a guided setup you run with the AI tool of your choice, plus a set of ongoing AI prompts and supporting materials delivered through a private access page.',
+            'It’s a one-time purchase. There is no subscription, nothing renews, and your access doesn’t expire. The documents the tools produce are yours to keep.',
+          ],
+        },
+        {
+          heading: 'What this product is not',
+          body: [
+            'This product is educational. It’s a system for organizing your own money decisions. It is not financial, investment, tax, or legal advice, and ArcGenesis Finance is not a registered financial advisor. Every decision you make with your money is yours, and you should consult a qualified professional for advice about your specific situation.',
+            'Results depend on your situation and your follow-through. We don’t promise any specific financial outcome.',
+          ],
+        },
+        {
+          heading: '60-day money-back guarantee',
+          body: [
+            'If you buy the system and decide within 60 days that it wasn’t worth what you paid, email us and you get a full refund. No questions, no forms. The support address is at the bottom of every page.',
+          ],
+        },
+        {
+          heading: 'Payments',
+          body: [
+            'Checkout and payment processing are handled by Kit Commerce. Your payment details go to Kit and their payment processor, not to us. Their terms apply to the transaction itself.',
+          ],
+        },
+        {
+          heading: 'Your access link',
+          body: [
+            'After purchase you receive a private link to the system by email. The link is for you. Please don’t share it publicly or redistribute the materials. You’re welcome to use everything you produce with the tools however you like, including sharing your own documents with a partner or family.',
+          ],
+        },
+        {
+          heading: 'AI tools',
+          body: [
+            'The system runs through AI chat tools you already use, like Claude or ChatGPT. Those tools belong to their own companies, have their own terms, and can occasionally produce mistakes. Check any number or suggestion that matters before acting on it.',
+          ],
+        },
+        {
+          heading: 'Changes to these terms',
+          body: [
+            'If we update these terms, the new version goes on this page with a new date. Buying or using the product after a change means you accept the updated terms.',
+          ],
+        },
+        {
+          heading: 'Contact',
+          body: [
+            'Questions about any of this? Email zac.arcgen@gmail.com and you’ll get a reply from a real person.',
+          ],
+        },
+      ],
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      updated: 'Last updated: June 2026',
+      sections: [
+        {
+          heading: 'The short version',
+          body: [
+            'We collect as little as possible. No accounts, no tracking cookies, no selling data. The free tools on this site work without giving us anything, including your email.',
+          ],
+        },
+        {
+          heading: 'Email',
+          body: [
+            'If you choose to join the email list, your email address is stored with Kit (kit.com), the service that sends our emails. We use it to send you the content you signed up for and occasional updates about the product. Every email has an unsubscribe link, and unsubscribing takes one click.',
+            'You never have to give us your email to use the free tools on this site.',
+          ],
+        },
+        {
+          heading: 'Purchases',
+          body: [
+            'Checkout runs through Kit Commerce. Kit and their payment processor handle your payment details; we never see your card number. After a purchase, Kit stores your email so we can send your access link and free product updates.',
+          ],
+        },
+        {
+          heading: 'Analytics',
+          body: [
+            'We use privacy-friendly analytics to count visits and see which pages get used, so we can make the site better. The analytics are aggregate numbers, not profiles of you. No advertising trackers, no cross-site tracking.',
+          ],
+        },
+        {
+          heading: 'What you share with AI tools',
+          body: [
+            'The system’s tools run in your own AI chat (Claude, ChatGPT, or another tool you pick). Whatever you type there goes to that AI provider under their privacy policy, not to us. We never see your conversations, your numbers, or the documents you produce.',
+          ],
+        },
+        {
+          heading: 'Your choices',
+          body: [
+            'Want your email removed from the list entirely? Unsubscribe from any email, or write to zac.arcgen@gmail.com and we’ll delete it.',
+          ],
+        },
+        {
+          heading: 'Changes to this policy',
+          body: [
+            'If this policy changes, the new version goes on this page with a new date.',
+          ],
+        },
+      ],
+    },
+  },
+
+  // ── Not-found page (catch-all route) ─────────────────────────────────────
+  // Deliberately generic: the same page renders for every unknown URL,
+  // including wrong /system/ slugs, with no hint about what else exists.
+  notFound: {
+    headline: 'Nothing lives at {{this address.}}',
+    body: 'The page may have moved, or the link may be off by a character. Either way, the home page has everything worth finding.',
+    cta: 'Back to the home page',
   },
 
   // ── Footer ───────────────────────────────────────────────────────────────

@@ -1,5 +1,6 @@
 import { CONTENT } from '../config/content.js'
 import { SITE } from '../config/site.js'
+import { track } from '../lib/analytics.js'
 
 /**
  * Pricing — dark band. The offer, one price, the buy button.
@@ -48,7 +49,14 @@ export default function Pricing() {
               </p>
             )}
 
-            <a href={SITE.checkoutUrl} data-commerce className="btn-primary btn-full">{pricing.cta}</a>
+            <a
+              href={SITE.checkoutUrl}
+              data-commerce
+              className="btn-primary btn-full"
+              onClick={() => track('checkout_opened', { location: 'pricing' })}
+            >
+              {pricing.cta}
+            </a>
 
             {pricing.finePrint && (
               <p className="pricing-fineprint">{pricing.finePrint}</p>

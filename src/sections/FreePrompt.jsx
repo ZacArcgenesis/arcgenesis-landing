@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
+import { track } from '../lib/analytics.js'
 
 /**
  * FreePrompt — dark band. Used to embed the prompt inline; now teases the
@@ -22,7 +23,11 @@ export default function FreePrompt() {
           <p className="lead on-dark-muted">{freePrompt.intro}</p>
 
           <div style={{ marginTop: '2.25rem' }}>
-            <Link to="/environment-audit" className="btn-primary">
+            <Link
+              to="/environment-audit"
+              className="btn-primary"
+              onClick={() => track('audit_cta_clicked', { location: 'free-prompt' })}
+            >
               {freePrompt.ctaLabel}
             </Link>
           </div>

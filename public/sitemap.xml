@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Public surface only. The buyer delivery page under /system/ is never
+     listed here. Guides are deliberately excluded until each one is marked
+     finished; add a <url> entry per guide when Zac says it's final. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://arcgenesisfinance.com/</loc>
+  </url>
+  <url>
+    <loc>https://arcgenesisfinance.com/environment-audit</loc>
+  </url>
+  <url>
+    <loc>https://arcgenesisfinance.com/terms</loc>
+  </url>
+  <url>
+    <loc>https://arcgenesisfinance.com/privacy</loc>
+  </url>
+</urlset>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import { TOOLKIT, SITE } from '../config/site.js'
 import Highlight from '../components/Highlight.jsx'
+import { track } from '../lib/analytics.js'
 
 /**
  * Hero — dark band, two columns.
@@ -12,7 +13,7 @@ import Highlight from '../components/Highlight.jsx'
  * the proof, not a competing CTA.
  * Right: a layered stack of five "prompt" cards tilted on an angle. The
  * front card is the free tool (Environment Audit, demonstrated in the
- * FreePrompt section below); the four cards behind it are the four
+ * FreePrompt section below); the four cards behind it are the first four
  * ongoing tools from the toolkit. Decorative (aria-hidden).
  */
 
@@ -54,7 +55,7 @@ export default function Hero() {
   const { hero } = CONTENT
 
   // Card filenames: front = the free tool (Environment Audit),
-  // backs = the four ongoing tools from the toolkit.
+  // backs = the first four ongoing tools from the toolkit.
   const frontFile = toFileName(SITE.freePromptToolName)
   const backFiles = TOOLKIT.slice(0, 4).map((t) => toFileName(t.name))
 
@@ -73,7 +74,13 @@ export default function Hero() {
 
             <div className="hero-cta-row">
               <a href="#pricing" className="btn-primary">{hero.ctaPrimary}</a>
-              <Link to="/environment-audit" className="btn-ghost">{hero.ctaSecondary}</Link>
+              <Link
+                to="/environment-audit"
+                className="btn-ghost"
+                onClick={() => track('audit_cta_clicked', { location: 'hero' })}
+              >
+                {hero.ctaSecondary}
+              </Link>
             </div>
 
             <p className="hero-reassurance">{hero.reassurance.join(' · ')}</p>

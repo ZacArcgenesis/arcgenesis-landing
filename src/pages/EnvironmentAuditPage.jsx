@@ -51,6 +51,10 @@ export default function EnvironmentAuditPage() {
             </div>
 
             <p className="audit-prompt-after">{page.promptAfter}</p>
+
+            {/* No opt-in form here by design: the Deep-Dive opt-in lives on
+                its own page (/environment-deep-dive), which the audit
+                conversation points the visitor to after they finish. */}
           </div>
         </section>
 

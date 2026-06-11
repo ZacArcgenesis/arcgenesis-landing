@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import JSZip from 'jszip'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
@@ -12,6 +12,7 @@ import {
   SETUP_PHASES,
   getPhaseTools,
 } from '../config/system-prompts.js'
+import roadmapRaw from '../config/system-prompts/roadmap.md?raw'
 
 /**
  * SystemAccessPage — the buyer-only delivery page for the 4 Hours to
@@ -24,7 +25,7 @@ import {
  *     AI notes)
  *   - Four setup phase sections (Orientation, Diagnosis, Design, Execution)
  *     with their tools grouped underneath
- *   - Ongoing toolkit section with the four permanent tools
+ *   - Ongoing toolkit section with the five permanent tools
  *
  * The page is intentionally never linked from the public site. The slug is
  * the access mechanism — same tier as a Google Drive "anyone with the link"
@@ -35,11 +36,26 @@ export default function SystemAccessPage() {
   const page = CONTENT.systemAccessPage
   const [downloadState, setDownloadState] = useState('idle')
 
+  // Keep this page out of every index. robots.txt already disallows
+  // /system/, but the two layers cover different leak paths: robots.txt
+  // stops polite crawlers from fetching the page at all, while this tag
+  // stops indexing if the URL ever leaks and gets fetched anyway (e.g.,
+  // via a shared link). Belt and suspenders — keep both.
+  useEffect(() => {
+    const meta = document.createElement('meta')
+    meta.name = 'robots'
+    meta.content = 'noindex, nofollow, noarchive'
+    document.head.appendChild(meta)
+    return () => meta.remove()
+  }, [])
+
   async function downloadAll() {
     setDownloadState('working')
     try {
       const zip = new JSZip()
       const folder = zip.folder('4hours-finance-system')
+      // The roadmap rides along so the zip is the complete package.
+      folder.file('roadmap.md', roadmapRaw)
       SYSTEM_PROMPTS.forEach((tool) => {
         folder.file(tool.prompt.fileName, tool.prompt.body)
       })
@@ -245,6 +261,10 @@ function DefinitionList({ items }) {
 }
 
 function WalkthroughCallout({ data }) {
+  // Self-hides while the video URL is still the '#...' placeholder, so
+  // buyers never see a CTA that goes nowhere. Appears automatically the
+  // moment a real URL lands in config.
+  if (!data.url || data.url.startsWith('#')) return null
   return (
     <aside className="system-walkthrough">
       <p className="system-walkthrough-label">{data.label}</p>
@@ -270,6 +290,14 @@ function ToolCard({ tool, index }) {
         <h3 className="system-tool-name">{tool.name}</h3>
         <p className="system-tool-line">{tool.line}</p>
       </header>
+      {/* Interstitial — how and when to use this tool, read before copying. */}
+      {tool.before && (
+        <div className="system-tool-before">
+          {tool.before.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
+      )}
       <PromptWindow prompt={tool.prompt} />
     </article>
   )

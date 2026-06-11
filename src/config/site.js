@@ -29,25 +29,37 @@ export const SITE = {
   // The actual prompt text lives in ./prompt.js — this is just metadata.
   freePromptToolName: 'Environment Audit',
 
+  // ── Kit email opt-in ─────────────────────────────────────────────────────
+  // One Kit form (the one attached to the Environment Deep-Dive sequence)
+  // receives every opt-in on the site: the /environment-deep-dive page and
+  // the inline EmailCapture blocks on the audit page and the guides.
+  // The form must have the "First name" field enabled — the deep-dive page
+  // posts fields[first_name] alongside email_address.
+  kitFormAction: 'https://app.kit.com/forms/9549718/subscriptions',
+
   // ── Links ────────────────────────────────────────────────────────────────
   links: {
     support: 'mailto:zac.arcgen@gmail.com',
-    terms: '#',
-    privacy: '#',
+    terms: '/terms',
+    privacy: '/privacy',
   },
 }
 
-// The four ongoing AI tools the buyer keeps permanently. These are the
+// The five ongoing AI tools the buyer keeps permanently. These are the
 // "toolkit" that maintains the system after the four-hour setup is done.
-// One-sentence descriptions, scannable.
+// One-sentence descriptions, scannable. Same order as the buyer page.
 export const TOOLKIT = [
-  {
-    name: 'Spending Regret Decoder',
-    line: 'Diagnoses what happened when you bought something you wish you hadn’t, and what to do differently.',
-  },
   {
     name: 'Monthly Financial Force Review',
     line: 'A 15-minute monthly check-in that shows you one number: did you move forward or backward?',
+  },
+  {
+    name: 'Money Finder',
+    line: 'Hunts through your real numbers for money you can put toward your goals when you want to move faster.',
+  },
+  {
+    name: 'Spending Regret Decoder',
+    line: 'Diagnoses what happened when you bought something you wish you hadn’t, and what to do differently.',
   },
   {
     name: 'Plan Recalibrator',

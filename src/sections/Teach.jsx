@@ -1,9 +1,13 @@
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
+import ProseBlocks from '../components/ProseBlocks.jsx'
 
 /**
  * Teach — light band. Builds trust by teaching the core idea before any ask.
  * This is the most important copy beat for a warm-but-skeptical visitor.
+ * Body renders via ProseBlocks: short chunks with one bolded landing point
+ * each, plus the pull-quote pattern interrupt — visitors scan, they don't
+ * read, so the emphasis has to carry the argument on its own.
  */
 export default function Teach() {
   const { teach } = CONTENT
@@ -21,12 +25,10 @@ export default function Teach() {
               marginTop: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.75rem',
+              gap: '1.375rem',
             }}
           >
-            {teach.body.map((para, i) => (
-              <p key={i} className="lead" style={{ margin: 0 }}>{para}</p>
-            ))}
+            <ProseBlocks blocks={teach.body} />
           </div>
         </div>
       </div>

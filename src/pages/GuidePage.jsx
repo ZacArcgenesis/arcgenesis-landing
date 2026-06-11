@@ -3,42 +3,10 @@ import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
 import PromptWindow from '../components/PromptWindow.jsx'
+import EmailCapture from '../components/EmailCapture.jsx'
 import Navbar from '../sections/Navbar.jsx'
 import Footer from '../sections/Footer.jsx'
-
-/**
- * Inline markup for prose blocks. Three patterns are recognized:
- *   **bold**         → <strong>
- *   ((kicker))       → <span class="guide-kicker"> (small uppercase cyan marker)
- *   [text](/path)    → <Link to="/path">  (internal route)
- *   [text](https://) → <a href="...">     (external; opens in new tab)
- *
- * Applied to every prose block so authors can mark emphasis inline in the
- * content config (paragraphs, pull quotes, list items).
- */
-function renderInline(text) {
-  if (text == null) return null
-  const parts = String(text).split(/(\*\*[^*]+\*\*|\(\([^)]+\)\)|\[[^\]]+\]\([^)]+\))/g)
-  return parts.map((part, i) => {
-    const boldMatch = part.match(/^\*\*(.+)\*\*$/)
-    if (boldMatch) return <strong key={i}>{boldMatch[1]}</strong>
-    const kickerMatch = part.match(/^\(\((.+)\)\)$/)
-    if (kickerMatch) return <span key={i} className="guide-kicker">{kickerMatch[1]}</span>
-    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
-    if (linkMatch) {
-      const [, label, url] = linkMatch
-      if (url.startsWith('/')) {
-        return <Link key={i} to={url} className="guide-inline-link">{label}</Link>
-      }
-      return (
-        <a key={i} href={url} target="_blank" rel="noreferrer" className="guide-inline-link">
-          {label}
-        </a>
-      )
-    }
-    return part
-  })
-}
+import { renderInline } from '../lib/renderInline.jsx'
 
 /**
  * GuidePage — the shared layout for every pillar guide.
@@ -177,6 +145,16 @@ export default function GuidePage({ guide, prompt }) {
             </div>
           </section>
         )}
+
+        {/* ─── Email opt-in (after the value, before the ask) ───────── */}
+        <section className="section-wrap guide-optin-band">
+          <div className="container section-pad-sm">
+            <EmailCapture
+              copy={CONTENT.emailCapture.guides}
+              source={`guide-${guide.slug}`}
+            />
+          </div>
+        </section>
 
         {/* ─── Handoff CTA back to the main system ─────────────────── */}
         <section className="section-wrap audit-handoff grid-texture">

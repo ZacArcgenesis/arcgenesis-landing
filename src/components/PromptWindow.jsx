@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FREE_PROMPT } from '../config/prompt.js'
+import { track } from '../lib/analytics.js'
 
 /**
  * PromptWindow — the "copy the prompt" code window.
@@ -26,6 +27,7 @@ export default function PromptWindow({ prompt = FREE_PROMPT }) {
       document.body.removeChild(ta)
     }
     setCopied(true)
+    track('prompt_copied', { prompt: fileName })
     setTimeout(() => setCopied(false), 2000)
   }
 
