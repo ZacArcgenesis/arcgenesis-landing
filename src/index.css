@@ -1895,13 +1895,15 @@ img { max-width: 100%; display: block; }
 }
 .founder-photo {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: 0 18px 44px rgba(32, 35, 42, 0.14);
 }
 /* Quiet stand-in panel that renders until public/zac.jpg exists. */
 .founder-photo-placeholder {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1915,7 +1917,16 @@ img { max-width: 100%; display: block; }
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+/* Story copy runs a notch smaller than the standard lead so the column
+   height stays close to the square photo beside it. */
+.founder-copy .lead {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+.founder-copy .prose-pullquote {
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
 }
 .founder-attribution {
   margin: 1.75rem 0 0;
@@ -1923,20 +1934,27 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
   color: var(--text);
 }
+/* Wider band than the standard container so the photo can sit large
+   beside the story at equal width. */
+.founder-band .container { max-width: 1200px; }
+
 @media (min-width: 880px) {
   .founder-grid {
     flex-direction: row;
-    align-items: flex-start;
-    gap: 3.5rem;
+    /* The square photo is shorter than the story column, so it centers
+       vertically beside the text instead of stretching to match. */
+    align-items: center;
+    gap: clamp(2.5rem, 4vw, 4rem);
     max-width: none;
   }
+  /* Photo and copy split the row evenly; the 1:1 photo's height follows
+     its column width. */
   .founder-photo-wrap {
-    flex: 0 0 340px;
+    flex: 1 1 0;
     max-width: none;
-    /* Optical alignment with the copy column's accent bar + headline. */
-    margin-top: 0.375rem;
+    min-width: 0;
   }
-  .founder-copy { flex: 1; min-width: 0; }
+  .founder-copy { flex: 1 1 0; min-width: 0; }
 }
 
 /* ─── Plan strip (three numbered steps — a path, not a feature grid) ─────── */

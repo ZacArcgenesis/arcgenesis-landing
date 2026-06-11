@@ -18,13 +18,13 @@ import useScrollReveal from './hooks/useScrollReveal.js'
 /**
  * App — the single long-form sales page.
  *
- * Section order IS the StoryBrand arc: hero's goal → villain (Teach, ending
- * on the exoneration) → guide (Zac) → free proof → 3-step plan → what you
- * get → emotional peak → who it's for → the ask. Don't reorder casually.
+ * Section order IS the persuasion arc: hero's goal → guide (Zac, trust
+ * first) → problem (Teach) → free proof → 3-step plan → what you get →
+ * emotional peak → who it's for → the ask. Don't reorder casually.
  * Each section pulls its own copy from src/config/.
  *
  * Band rhythm (keep it when inserting sections):
- * dark → gray → white → dark → gray → white → dark → gray → white → dark →
+ * dark → white → gray → dark → gray → white → dark → gray → white → dark →
  * white → gray → dark → footer.
  */
 export default function App() {
@@ -35,8 +35,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Teach />
         <Guide />
+        <Teach />
         <FreePrompt />
         <Plan />
         <Setup />

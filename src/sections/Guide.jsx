@@ -17,7 +17,7 @@ export default function Guide() {
   const [photoMissing, setPhotoMissing] = useState(false)
 
   return (
-    <section id="guide" className="section-wrap bg-white">
+    <section id="guide" className="section-wrap bg-white founder-band">
       <div className="container section-pad">
         <div className="founder-grid">
           <div className="founder-photo-wrap">

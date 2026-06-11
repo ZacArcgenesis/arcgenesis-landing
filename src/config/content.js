@@ -57,17 +57,14 @@ export const CONTENT = {
   teach: {
     headline: 'You know where you {{want to go.}} You just can’t get there.',
     body: [
-      'You have the goal. You’ve probably thought about it for years. Maybe you’ve even tried working toward it before. Buying a house, paying off debt, starting to invest, saving for a vacation, or whatever.',
-      'But every month the money disappears, you stay exactly where you are, and **the goal continues to stay out of reach.**',
-      'And it will continue to stay out of reach unless you change this one thing. It doesn’t matter how good your investment strategy is if you don’t have money to invest. It doesn’t matter how much you know about real estate if you can’t save for the down payment. It doesn’t matter how many videos on getting out of debt you watch.',
-      'Every financial goal sits on top of the same foundation: **consistently having more coming in than going out.** Without it, you won’t make any progress. This system was built to help you do just that: start making progress.',
-      'And here’s the part nobody tells you. The reason you’re stuck was never a lack of willpower. **Your environment is not neutral.** One-click checkout, saved cards everywhere, notifications timed for when you’re tired, a feed full of things to want.',
-      'The whole thing is built to move money out of your pocket, and **it’s working exactly as designed.** You’ve been white-knuckling it against a system that was engineered to win.',
+      'You have the goal. You’ve probably thought about it for years. Buying a house, paying off debt, starting to invest. But every month the money disappears, and **the goal stays out of reach.**',
+      'Here’s why. Every financial goal sits on the same foundation: **consistently having more coming in than going out.** The best investment strategy in the world doesn’t matter if there’s nothing left to invest. Without the foundation, nothing else works.',
+      'And the reason you don’t have it was never a lack of willpower. Look at what you’re up against: one-click checkout, saved cards everywhere, notifications timed for when you’re tired. **Everything around you is built to make spending easy and saving hard.** And it’s working exactly as designed.',
       {
         kind: 'pull-quote',
-        text: 'It was never willpower. It’s architecture.',
+        text: 'It was never willpower. Nothing was set up in your favor.',
       },
-      'And architecture can be changed.',
+      'This is where that changes. The system on this page does one thing: it gets everything around your money working **for** you, so you stop white-knuckling it and start making progress that doesn’t depend on having a good day.',
     ],
   },
 
@@ -77,16 +74,14 @@ export const CONTENT = {
   guide: {
     headline: 'Built by {{someone who needed it.}}',
     body: [
-      'I spent years studying how to build wealth. Books, seminars, investing strategies. I could explain half a dozen paths to financial freedom from memory.',
-      'Then a friend asked me to help him make a budget, and I had to admit something kind of embarrassing: **I didn’t have one.**',
+      'I spent years studying how to build wealth. Books, seminars, investing strategies. Then a friend asked me to help him make a budget, and I had to admit something kind of embarrassing: **I didn’t have one.**',
       {
         kind: 'pull-quote',
         text: 'All that knowledge, and I had implemented none of it.',
       },
-      'Because at the end of every month, there was never anything left over to implement it with. That was the moment I realized I had skipped the step that everything else sits on: **consistently having more money coming in than going out.** No strategy works without it. So I decided to actually figure that out.',
-      'I started by taking ten days and reading ten books on money management. A book a day. Dave Ramsey, Ramit Sethi, Tony Robbins, the YNAB book, The Financial Diet, even Ray Dalio’s Principles. And honestly? Not one of them fit my life on its own.',
-      'So I pulled out the pieces that worked, left out what didn’t, and **built my own way of running my money.** A clear picture of where it was going, what was pushing me to spend, a budget that fit my actual life, and a way to keep the whole thing running when life got messy.',
-      'Then I spent years refining it, keeping what worked and cutting what didn’t. **That’s the system on this page.** It’s how I run my money today, and the setup builds yours the same way I built mine: around your real life, your real numbers, and your real goals instead of somebody else’s template.',
+      'Because at the end of every month, there was never anything left over to implement it with. I had skipped the step everything else sits on. So I decided to actually figure it out: ten days, ten books on money management. A book a day. Dave Ramsey, Ramit Sethi, Tony Robbins, the YNAB book, even Ray Dalio’s Principles. And honestly? Not one of them fit my life on its own.',
+      'So I pulled out the pieces that worked and **built my own way of running my money.** A clear picture of where it went, what was pushing me to spend, a budget that fit my actual life. Then I spent years refining it, keeping what worked and cutting what didn’t.',
+      '**That’s the system on this page.** The setup builds yours the same way I built mine: around your real life, your real numbers, your real goals. Not somebody else’s template.',
     ],
     attribution: 'Zac Bradshaw, ArcGenesis Finance',
     // Photo alt text for /zac.webp (the image itself lives in public/).
