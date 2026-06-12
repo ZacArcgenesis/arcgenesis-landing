@@ -37,9 +37,9 @@ export const CONTENT = {
     // Tight body paragraph beneath the subhead — names the goals, the
     // mechanism, and the permanence in plain terms.
     body:
-      'Buying a home. Paying off debt. Investing. Retiring early. None of it works if you’re consistently spending everything you earn. This system builds the foundation around your actual income, your actual expenses, and your actual goals — then gives you tools to keep it running as life shifts.',
-    ctaPrimary: 'Build My Plan — $97',
-    ctaSecondary: 'Try the Environment Audit — Free',
+      'Buying a home. Paying off debt. Investing. Retiring early. None of it works if you’re consistently spending everything you earn. This system builds the foundation around your actual income, your actual expenses, and your actual goals. Then it gives you the tools to keep it running as life shifts.',
+    ctaPrimary: 'Build My Plan · $97',
+    ctaSecondary: 'Try the Environment Audit · Free',
     // Joined with ' · ' separators into a single small line beneath the CTAs.
     reassurance: [
       'Works in Claude, ChatGPT, or any AI',
@@ -581,13 +581,13 @@ export const CONTENT = {
       ],
       promptHead: {
         headline: 'See the gap.',
-        lede: 'The Goal-to-Reality Gap prompt asks you to name one specific goal, then shows you the math on whether you’re on track — and what would have to change to close the gap.',
+        lede: 'The Goal-to-Reality Gap prompt asks you to name one specific goal, then shows you the math on whether you’re on track, and what would have to change to close the gap.',
       },
       promptAfter:
         'The number is the number. Once you can see it, the next step is deciding what to do about it.',
       handoffHeadline: 'A gap on paper. {{A plan in practice.}}',
       handoffSub:
-        'The gap prompt shows you the math. The full system builds the budget that actually closes it — your real numbers, your real goal, a working plan, and a 30-day launch to get it running. Four hours. One payment. Yours forever.',
+        'The gap prompt shows you the math. The full system builds the budget that actually closes it: your real numbers, your real goal, a working plan, and a 30-day launch to get it running. Four hours. One payment. Yours forever.',
       handoffCta: 'See the full system',
     },
 
@@ -865,7 +865,7 @@ export const CONTENT = {
       'Video walkthrough of a real budget being built',
       'Every prompt, ready for any AI',
       'The roadmap that ties it all together',
-      'Free updates for life — we email you whenever the product improves',
+      'Free updates for life. We email you whenever the product improves.',
     ],
     cta: 'Build My Plan',
     finePrint: null,
@@ -908,15 +908,15 @@ export const CONTENT = {
       },
       {
         q: 'What if my income is irregular?',
-        a: 'The system is built around your actual numbers, whatever they are. The setup asks you about income variability directly and builds the budget to flex with it. Freelancers and gig workers get a different working budget than someone with a steady paycheck — same tools, different output.',
+        a: 'The system is built around your actual numbers, whatever they are. The setup asks you about income variability directly and builds the budget to flex with it. Freelancers and gig workers get a different working budget than someone with a steady paycheck. Same tools, different output.',
       },
       {
-        q: 'What if I’m already deep in debt — will this still work?',
-        a: 'Yes. The system doesn’t assume you’re starting from zero. It maps your real situation, including debt, and builds the plan from there. Several of the tools — especially the budget and the launch plan — are designed to give debt payoff a real place in the picture instead of treating it like an afterthought.',
+        q: 'What if I’m already deep in debt? Will this still work?',
+        a: 'Yes. The system doesn’t assume you’re starting from zero. It maps your real situation, including debt, and builds the plan from there. Several of the tools, especially the budget and the launch plan, are designed to give debt payoff a real place in the picture instead of treating it like an afterthought.',
       },
       {
         q: 'How is this different from a budgeting app like YNAB or Mint?',
-        a: 'Apps track. This builds. YNAB and Mint show you what happened with your money. This system helps you decide what you want to happen, names what’s been pushing you off course, and gives you a plan to move toward your goals. You can use both — they do different jobs.',
+        a: 'Apps track. This builds. YNAB and Mint show you what happened with your money. This system helps you decide what you want to happen, names what’s been pushing you off course, and gives you a plan to move toward your goals. You can use both. They do different jobs.',
       },
       {
         q: 'What if it doesn’t work for me?',
@@ -961,7 +961,7 @@ export const CONTENT = {
   finalCta: {
     headline: 'Four hours to be on {{the path.}}',
     body: 'You already tried one of the tools. The full system is the rest of that: the setup that gets you moving and the tools that keep you moving. Four hours from now, you’ll know exactly where you are, where you’re going, and what’s next.',
-    cta: 'Build My Plan — $97',
+    cta: 'Build My Plan · $97',
     sub: '30-day money-back guarantee',
   },
 

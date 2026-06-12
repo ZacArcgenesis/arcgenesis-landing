@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="Inter, -apple-system, Segoe UI, sans-serif">
+  <rect width="800" height="520" fill="#20232a"/>
+  <g stroke="#2a2e37" stroke-width="1">
+    <path d="M100 0V520M200 0V520M300 0V520M400 0V520M500 0V520M600 0V520M700 0V520"/>
+    <path d="M0 80H800M0 160H800M0 240H800M0 320H800M0 400H800"/>
+  </g>
+
+  <!-- phone -->
+  <g transform="translate(250,30)">
+    <rect x="0" y="0" width="300" height="460" rx="36" fill="#16191f" stroke="#3a3f4a" stroke-width="3"/>
+    <rect x="110" y="14" width="80" height="10" rx="5" fill="#2a2e37"/>
+
+    <!-- time -->
+    <text x="150" y="78" fill="#f8f9fa" font-size="34" font-weight="300" text-anchor="middle">10:47 PM</text>
+
+    <!-- notification cards -->
+    <g font-size="14">
+      <!-- card 1 -->
+      <rect x="20" y="105" width="260" height="62" rx="12" fill="#262b34"/>
+      <circle cx="44" cy="136" r="11" fill="#e0535f"/>
+      <text x="64" y="130" fill="#f8f9fa" font-weight="600">FLASH SALE ends at midnight</text>
+      <text x="64" y="150" fill="#8a93a3">40% off everything in your size</text>
+
+      <!-- card 2 -->
+      <rect x="20" y="177" width="260" height="62" rx="12" fill="#262b34"/>
+      <circle cx="44" cy="208" r="11" fill="#e8a13c"/>
+      <text x="64" y="202" fill="#f8f9fa" font-weight="600">Your cart misses you</text>
+      <text x="64" y="222" fill="#8a93a3">Still thinking it over? Buy in 1 click</text>
+
+      <!-- card 3 -->
+      <rect x="20" y="249" width="260" height="62" rx="12" fill="#262b34"/>
+      <circle cx="44" cy="280" r="11" fill="#5b8def"/>
+      <text x="64" y="274" fill="#f8f9fa" font-weight="600">Split it into 4 easy payments</text>
+      <text x="64" y="294" fill="#8a93a3">Only $22.49 today</text>
+
+      <!-- card 4 -->
+      <rect x="20" y="321" width="260" height="62" rx="12" fill="#262b34"/>
+      <circle cx="44" cy="352" r="11" fill="#52b86a"/>
+      <text x="64" y="346" fill="#f8f9fa" font-weight="600">Order again?</text>
+      <text x="64" y="366" fill="#8a93a3">Your usual, delivered in 30 min</text>
+
+      <!-- card 5, peeking -->
+      <rect x="20" y="393" width="260" height="40" rx="12" fill="#262b34" opacity="0.55"/>
+      <circle cx="44" cy="413" r="11" fill="#b06fd8" opacity="0.55"/>
+      <text x="64" y="419" fill="#8a93a3" opacity="0.8" font-weight="600">New drop, picked for you</text>
+    </g>
+  </g>
+
+  <!-- caption row -->
+  <text x="400" y="510" fill="#37d3f1" font-size="18" font-weight="600" text-anchor="middle">10:47 PM. You weren't even shopping.</text>
+</svg>

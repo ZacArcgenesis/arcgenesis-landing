@@ -69,6 +69,11 @@ All swappable content lives in `src/config/`; components only render it:
 
 `{{double-brace}}` markers in supported headlines render in the accent color via `Highlight`.
 
+### Approved visuals (final designs; edit only on explicit instruction)
+
+- **Teach month chart** — `src/components/MonthChart.jsx`, the "month, twice" two-panel comparison rendered inside Teach. Master SVG lives at `images/teach-visual-1C-goal-stack.svg` (designed for a dark band; the component inverts the neutral grays for Teach's light band and strips the background). Geometry, labels, cyan, and the red empty-zone are locked.
+- **Notification-pile graphic ("10:47 PM")** — designed and approved but ON HOLD. Not on any page. Zac decides later whether it goes on the environment audit page or becomes a thumbnail. Do not build or place it without explicit instruction.
+
 ## Design system
 
 - Dark/light alternating bands. Preserve the alternation when adding sections.

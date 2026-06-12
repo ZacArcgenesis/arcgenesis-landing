@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Inter, -apple-system, Segoe UI, sans-serif">
+  <rect width="800" height="600" fill="#20232a"/>
+  <g stroke="#2a2e37" stroke-width="1">
+    <path d="M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600M600 0V600M700 0V600"/>
+    <path d="M0 100H800M0 200H800M0 300H800M0 400H800M0 500H800"/>
+  </g>
+
+  <!-- ============ PANEL A: MOST MONTHS ============ -->
+  <g transform="translate(50,50)">
+    <text x="0" y="0" fill="#8a93a3" font-size="18" font-weight="700" letter-spacing="2">MOST MONTHS</text>
+
+    <line x1="0" y1="180" x2="500" y2="180" stroke="#5a6170" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <text x="-14" y="186" fill="#5a6170" font-size="16" text-anchor="end">$0</text>
+
+    <circle cx="0" cy="30" r="6" fill="#f8f9fa"/>
+    <text x="16" y="26" fill="#f8f9fa" font-size="16">payday</text>
+
+    <!-- empty zone: day 27 to 30 -->
+    <rect x="448" y="60" width="52" height="120" fill="#e0535f" opacity="0.10"/>
+    <line x1="448" y1="60" x2="448" y2="180" stroke="#e0535f" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.6"/>
+
+    <path d="M0 30 L60 56 L120 74 L185 100 L245 120 L305 140 L375 160 L448 180 L500 180"
+          fill="none" stroke="#5a6170" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <text x="474" y="96" fill="#e0535f" font-size="17" font-weight="700" text-anchor="middle">3 days</text>
+    <text x="474" y="96" dy="22" fill="#e0535f" font-size="17" font-weight="700" text-anchor="middle">on empty</text>
+
+    <text x="0" y="214" fill="#8a93a3" font-size="14">day 1</text>
+    <text x="500" y="214" fill="#8a93a3" font-size="14" text-anchor="end">day 30</text>
+
+    <!-- ghost block: nothing to stack this month -->
+    <rect x="585" y="146" width="70" height="34" rx="3" fill="none" stroke="#5a6170" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.5"/>
+    <line x1="550" y1="180" x2="690" y2="180" stroke="#5a6170" stroke-width="2" opacity="0.5"/>
+    <text x="620" y="214" fill="#5a6170" font-size="14" text-anchor="middle">nothing to stack</text>
+  </g>
+
+  <!-- ============ PANEL B: WITH THE SYSTEM ============ -->
+  <g transform="translate(50,340)">
+    <text x="0" y="0" fill="#37d3f1" font-size="18" font-weight="700" letter-spacing="2">WITH THE SYSTEM</text>
+
+    <line x1="0" y1="180" x2="500" y2="180" stroke="#5a6170" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <text x="-14" y="186" fill="#5a6170" font-size="16" text-anchor="end">$0</text>
+
+    <circle cx="0" cy="30" r="6" fill="#f8f9fa"/>
+    <text x="16" y="26" fill="#f8f9fa" font-size="16">same paycheck</text>
+
+    <path d="M0 30 L65 54 L130 72 L195 92 L260 108 L325 124 L415 136 L500 146"
+          fill="none" stroke="#37d3f1" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- leftover block at month end -->
+    <rect x="466" y="146" width="34" height="34" rx="3" fill="#37d3f1" opacity="0.30"/>
+    <line x1="500" y1="146" x2="500" y2="180" stroke="#37d3f1" stroke-width="4"/>
+    <text x="456" y="168" fill="#37d3f1" font-size="16" font-weight="600" text-anchor="end">left over</text>
+
+    <text x="0" y="214" fill="#8a93a3" font-size="14">day 1</text>
+    <text x="500" y="214" fill="#8a93a3" font-size="14" text-anchor="end">day 30</text>
+
+    <!-- arrow from leftover to the stack -->
+    <path d="M510 163 C530 163 532 163 540 163" fill="none" stroke="#37d3f1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M540 155 L554 163 L540 171 Z" fill="#37d3f1"/>
+
+    <!-- the goal stack, to the side -->
+    <line x1="550" y1="180" x2="690" y2="180" stroke="#5a6170" stroke-width="2"/>
+
+    <rect x="585" y="146" width="70" height="34" rx="3" fill="#37d3f1" opacity="0.35"/>
+    <rect x="585" y="112" width="70" height="34" rx="3" fill="#37d3f1" opacity="0.55"/>
+    <!-- this month, bright -->
+    <rect x="585" y="78" width="70" height="34" rx="3" fill="#37d3f1"/>
+
+    <!-- goal line, a bit higher -->
+    <line x1="552" y1="26" x2="688" y2="26" stroke="#f8f9fa" stroke-width="2" stroke-dasharray="7 6"/>
+    <text x="620" y="12" fill="#f8f9fa" font-size="17" font-weight="600" text-anchor="middle">your goal</text>
+
+    <text x="620" y="214" fill="#8a93a3" font-size="14" text-anchor="middle">month after month</text>
+  </g>
+</svg>

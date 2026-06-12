@@ -18,13 +18,15 @@ import useScrollReveal from './hooks/useScrollReveal.js'
 /**
  * App — the single long-form sales page.
  *
- * Section order IS the persuasion arc: hero's goal → guide (Zac, trust
- * first) → problem (Teach) → free proof → 3-step plan → what you get →
+ * Section order IS the persuasion arc: hero's goal → problem (Teach) →
+ * free proof (FreePrompt breaks up the two prose-heavy sections, and puts
+ * the founder story after the visitor has tried the tool, when "who built
+ * this?" is a live question) → guide (Zac) → 3-step plan → what you get →
  * emotional peak → who it's for → the ask. Don't reorder casually.
  * Each section pulls its own copy from src/config/.
  *
  * Band rhythm (keep it when inserting sections):
- * dark → white → gray → dark → gray → white → dark → gray → white → dark →
+ * dark → gray → dark → white → gray → white → dark → gray → white → dark →
  * white → gray → dark → footer.
  */
 export default function App() {
@@ -35,9 +37,9 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Guide />
         <Teach />
         <FreePrompt />
+        <Guide />
         <Plan />
         <Setup />
         <Toolkit />
