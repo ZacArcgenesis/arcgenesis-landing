@@ -73,6 +73,7 @@ All swappable content lives in `src/config/`; components only render it:
 
 - **Teach month chart** — `src/components/MonthChart.jsx`, the "month, twice" two-panel comparison rendered inside Teach. Master SVG lives at `images/teach-visual-1C-goal-stack.svg` (designed for a dark band; the component inverts the neutral grays for Teach's light band and strips the background). Geometry, labels, cyan, and the red empty-zone are locked.
 - **Notification-pile graphic ("10:47 PM")** — designed and approved but ON HOLD. Not on any page. Zac decides later whether it goes on the environment audit page or becomes a thumbnail. Do not build or place it without explicit instruction.
+- **FreePrompt sample document** — `src/components/AuditSampleDoc.jsx`, the mock environment-audit.md card in the FreePrompt section (master: `images/freeprompt-sample-doc-mockup.svg`; background stripped, viewBox tightened). Its copy lives in the SVG, not content.js.
 
 ## Design system
 

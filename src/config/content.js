@@ -138,21 +138,9 @@ export const CONTENT = {
       'Don’t take our word for any of this. One of the eleven tools from the full system is free to run. Get a personalized result and decide for yourself.',
     ctaLabel: 'Try the Environment Audit',
     ctaSub: 'No account. No email. Takes about fifteen minutes.',
-    // Sample slice of the actual Environment Audit output, rendered as a
-    // mock saved markdown document. Swap with a real anonymized customer
-    // output once one is available.
-    example: {
-      fileName: 'environment-audit.md',
-      glanceHeading: 'Your Environment at a Glance',
-      glance:
-        'The biggest pressure on your spending is one-click checkout across 8+ retailers, late-evening DoorDash use, and lifestyle accounts on Instagram driving "I want that" reactions.',
-      changesHeading: 'Highest-Impact Changes',
-      changes: [
-        'Remove every saved card, including Amazon. The 30-second friction of typing in a card breaks most impulse purchases.',
-        'Move DoorDash off your home screen. The 10pm tired-ordering pattern is your biggest discretionary spend right now.',
-        'Set a 30-minute daily limit on Instagram. The accounts you follow are making you want to buy things you weren’t planning to.',
-      ],
-    },
+    // The sample-output visual is the approved SVG mockup rendered by
+    // src/components/AuditSampleDoc.jsx (master: images/freeprompt-sample-
+    // doc-mockup.svg). Its text lives in the SVG, not here.
   },
 
   // ── Environment Audit page (its own route at /environment-audit) ────────

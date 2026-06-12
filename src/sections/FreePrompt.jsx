@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
+import AuditSampleDoc from '../components/AuditSampleDoc.jsx'
 import { track } from '../lib/analytics.js'
 
 /**
@@ -35,19 +36,8 @@ export default function FreePrompt() {
             {freePrompt.ctaSub}
           </p>
 
-          {freePrompt.example && (
-            <article className="audit-sample" aria-label="Sample Environment Audit output">
-              <p className="audit-sample-file">{freePrompt.example.fileName}</p>
-              <h4>{freePrompt.example.glanceHeading}</h4>
-              <p>{freePrompt.example.glance}</p>
-              <h4>{freePrompt.example.changesHeading}</h4>
-              <ol>
-                {freePrompt.example.changes.map((change, i) => (
-                  <li key={i}>{change}</li>
-                ))}
-              </ol>
-            </article>
-          )}
+          {/* Approved sample-output mockup (replaces the old HTML mock). */}
+          <AuditSampleDoc />
         </div>
       </div>
     </section>

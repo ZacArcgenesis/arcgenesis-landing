@@ -1726,60 +1726,18 @@ img { max-width: 100%; display: block; }
   }
 }
 
-/* ─── Audit sample (FreePrompt) ──────────────────────────────────────────── */
-/* Rendered to look like a saved markdown document — white "page" with a
-   filename header, hierarchy of in-doc headings, and a numbered list. Sits
-   on the FreePrompt dark band so the white card pops as a tangible artifact. */
-.audit-sample {
+/* ─── Audit sample document (FreePrompt, approved final design) ──────────── */
+/* The SVG mockup of a saved environment-audit.md document. Sits on the
+   FreePrompt dark band so the white card pops as a tangible artifact; the
+   soft drop shadow lifts it off the band like the old HTML mock did. */
+.audit-sample-doc {
+  width: 100%;
   max-width: 640px;
+  height: auto;
+  display: block;
   margin: 2.75rem auto 0;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: var(--white);
-  color: var(--text);
-  border-radius: 10px;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 18px 48px rgba(0, 0, 0, 0.32);
-  text-align: left;
-  font-family: var(--font-sans);
-  line-height: 1.6;
+  filter: drop-shadow(0 18px 48px rgba(0, 0, 0, 0.32));
 }
-.audit-sample-file {
-  margin: 0 0 1.5rem;
-  padding-bottom: 0.875rem;
-  border-bottom: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-  letter-spacing: 0.01em;
-}
-.audit-sample h4 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.005em;
-  color: var(--text);
-}
-.audit-sample h4 + p,
-.audit-sample h4 + ol { margin-top: 0; }
-.audit-sample p {
-  margin: 0;
-  font-size: 0.9375rem;
-  color: var(--text);
-}
-.audit-sample > p + h4,
-.audit-sample > ol + h4 { margin-top: 1.5rem; }
-.audit-sample ol {
-  margin: 0;
-  padding-left: 1.25rem;
-  list-style: decimal;
-  font-size: 0.9375rem;
-}
-.audit-sample ol li {
-  margin-top: 0.75rem;
-  padding-left: 0.25rem;
-}
-.audit-sample ol li:first-child { margin-top: 0; }
 
 /* ─── Guide / founder section (photo + story) ────────────────────────────── */
 /* Stacked on mobile (photo first), photo beside the story from 880px up. */
