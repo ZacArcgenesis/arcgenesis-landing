@@ -3,9 +3,9 @@ import Highlight from '../components/Highlight.jsx'
 
 /**
  * Plan — light gray band. A compact three-step strip: the simple path that
- * makes the ten-tool system feel walkable. Deliberately lighter (smaller
- * padding, no cards) than the Setup and Toolkit sections that follow it —
- * it should read as a path, not a feature grid.
+ * makes the eleven-tool system feel walkable. Deliberately minimal: titles
+ * only, no body text (the detail lives in Setup and Toolkit directly
+ * below). It should read as one tight band, a path rather than a grid.
  */
 export default function Plan() {
   const { plan } = CONTENT
@@ -23,9 +23,7 @@ export default function Plan() {
             {plan.steps.map((step, i) => (
               <li key={i} className="plan-step">
                 <span className="plan-step-num">{i + 1}</span>
-                <p className="plan-step-text">
-                  <strong>{step.title}</strong> {step.body}
-                </p>
+                <p className="plan-step-title">{step}</p>
               </li>
             ))}
           </ol>

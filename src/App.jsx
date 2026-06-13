@@ -6,7 +6,6 @@ import FreePrompt from './sections/FreePrompt.jsx'
 import Plan from './sections/Plan.jsx'
 import Setup from './sections/Setup.jsx'
 import Toolkit from './sections/Toolkit.jsx'
-import Activation from './sections/Activation.jsx'
 import ForWho from './sections/ForWho.jsx'
 import Pricing from './sections/Pricing.jsx'
 import PriceMath from './sections/PriceMath.jsx'
@@ -22,11 +21,11 @@ import useScrollReveal from './hooks/useScrollReveal.js'
  * free proof (FreePrompt breaks up the two prose-heavy sections, and puts
  * the founder story after the visitor has tried the tool, when "who built
  * this?" is a live question) → guide (Zac) → 3-step plan → what you get →
- * emotional peak → who it's for → the ask. Don't reorder casually.
+ * who it's for → the ask. Don't reorder casually.
  * Each section pulls its own copy from src/config/.
  *
  * Band rhythm (keep it when inserting sections):
- * dark → gray → dark → white → gray → white → dark → gray → white → dark →
+ * dark → gray → dark → white → gray → white → dark → white → dark →
  * white → gray → dark → footer.
  */
 export default function App() {
@@ -43,7 +42,6 @@ export default function App() {
         <Plan />
         <Setup />
         <Toolkit />
-        <Activation />
         <ForWho />
         <Pricing />
         <PriceMath />

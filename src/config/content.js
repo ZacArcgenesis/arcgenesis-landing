@@ -37,7 +37,7 @@ export const CONTENT = {
     // Tight body paragraph beneath the subhead — names the goals, the
     // mechanism, and the permanence in plain terms.
     body:
-      'Buying a home. Paying off debt. Investing. Retiring early. None of it works if you’re consistently spending everything you earn. This system builds the foundation around your actual income, your actual expenses, and your actual goals. Then it gives you the tools to keep it running as life shifts.',
+      'A guided AI setup plus a permanent toolkit, built to do one thing: get you consistently spending less than you earn, so the goals you’ve been circling for years finally start getting closer.',
     ctaPrimary: 'Build My Plan · $97',
     ctaSecondary: 'Try the Environment Audit · Free',
     // Joined with ' · ' separators into a single small line beneath the CTAs.
@@ -89,21 +89,14 @@ export const CONTENT = {
   },
 
   // ── Plan (compact three-step strip — the simple path) ───────────────────
+  // Titles only by design: the detail these steps used to carry lives in
+  // the Setup and Toolkit sections directly below.
   plan: {
     headline: 'Here’s how it works.',
     steps: [
-      {
-        title: 'Run the four-hour setup.',
-        body: 'A guided conversation with the AI you already use. It names your goals, maps your real numbers, and builds a budget that fits your actual life.',
-      },
-      {
-        title: 'Follow your 30-day launch plan.',
-        body: 'Week-by-week steps, built from your setup, that get the system running in your real life.',
-      },
-      {
-        title: 'Check one number each month.',
-        body: 'Fifteen minutes. Did you move forward or backward? Adjust and keep going.',
-      },
+      'Run the four-hour setup.',
+      'Follow your 30-day launch plan.',
+      'Check one number each month.',
     ],
   },
 
@@ -810,16 +803,10 @@ export const CONTENT = {
     intro: null,
   },
 
-  // ── Confidence framing (the emotional peak — centered, breathing room) ───
-  activation: {
-    headline: 'You don’t have to be there yet. You just have to know {{you’re going to get there.}}',
-    body: [
-      'Financial confidence isn’t something you earn after the goals are done. It shows up the moment you can see the path: your real numbers, your real goals, and proof that you’re moving forward.',
-      'The setup builds the path. The tools keep you on it. The confidence is what follows.',
-    ],
-  },
-
   // ── Ownership / no lock-in (no section headline in V2) ───────────────────
+  // CURRENTLY UNUSED: these four cards rendered inside the Activation
+  // section, which was removed (its message lives in FinalCta). Kept here
+  // in case the no-lock-in cards get re-homed near Pricing later.
   ownership: {
     headline: null,
     points: [

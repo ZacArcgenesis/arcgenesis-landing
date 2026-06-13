@@ -1816,19 +1816,20 @@ img { max-width: 100%; display: block; }
 }
 
 /* ─── Plan strip (three numbered steps — a path, not a feature grid) ─────── */
+/* Titles only, tight spacing: the strip reads as one compact band. */
 .plan-steps {
   list-style: none;
-  margin: 2.25rem 0 0;
+  margin: 1.75rem 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.625rem;
+  gap: 1rem;
 }
 .plan-step {
   position: relative;
   display: flex;
   gap: 1.25rem;
-  align-items: flex-start;
+  align-items: center;
 }
 .plan-step-num {
   flex-shrink: 0;
@@ -1843,27 +1844,24 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.125rem;
 }
 /* Thin connector between the number bubbles — the "path" feel. */
 .plan-step:not(:last-child)::before {
   content: '';
   position: absolute;
   left: calc(1rem - 1px);
-  top: 2.5rem;
-  bottom: -1.375rem;
+  top: 2.25rem;
+  bottom: -1.25rem;
   width: 2px;
   background: var(--border);
 }
-.plan-step-text {
+.plan-step-title {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--muted);
-}
-.plan-step-text strong {
-  color: var(--text);
+  font-size: 1.0625rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--text);
 }
 
 /* ─── ForWho (for you / not for you, two columns on desktop) ─────────────── */
