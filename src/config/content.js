@@ -172,6 +172,17 @@ export const CONTENT = {
       'A 15-minute conversation that maps the specific forces in your life pushing you to spend, then hands you a short list of things you can change today to reduce the pressure. Works in Claude, ChatGPT, or any modern AI.',
     meta: 'Free · No account · No email',
 
+    // Explainer video, between the hero and the prompt. Paste the YouTube
+    // video id (the part after watch?v=) to switch it on; while empty, the
+    // whole video section self-hides. Privacy-enhanced, facade-loaded embed
+    // (see VideoEmbed.jsx) so it costs nothing until someone presses play.
+    video: {
+      youtubeId: 'cgtFg1krYLE',
+      title: 'How the Environment Audit works',
+      // Optional /public poster path; falls back to the YouTube thumbnail.
+      poster: '',
+    },
+
     promptHead: {
       headline: 'Copy the prompt.',
       lede: 'Paste it into a fresh chat. The Audit will ask short questions about your environment, one at a time, then deliver your personalized map.',
@@ -1029,6 +1040,12 @@ export const CONTENT = {
           heading: 'Analytics',
           body: [
             'We use privacy-friendly analytics to count visits and see which pages get used, so we can make the site better. The analytics are aggregate numbers, not profiles of you. No advertising trackers, no cross-site tracking.',
+          ],
+        },
+        {
+          heading: 'Embedded video',
+          body: [
+            'Some pages include a video hosted on YouTube. Nothing from YouTube loads until you press play. When you do, YouTube (owned by Google) loads the player and may set cookies under its own privacy policy. We use YouTube’s privacy-enhanced mode, which holds off on that until you choose to watch. If you never press play, no YouTube content loads at all.',
           ],
         },
         {

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { CONTENT } from '../config/content.js'
 import Highlight from '../components/Highlight.jsx'
 import PromptWindow from '../components/PromptWindow.jsx'
+import VideoEmbed from '../components/VideoEmbed.jsx'
 import Navbar from '../sections/Navbar.jsx'
 import Footer from '../sections/Footer.jsx'
 import Faq from '../sections/Faq.jsx'
@@ -11,6 +12,7 @@ import Faq from '../sections/Faq.jsx'
  *
  * Sections, top to bottom:
  *   Hero (dark, centered, cyan glow + grid texture)
+ *   Video (dark band — explainer; self-hides until a video id is set)
  *   Prompt (light band — section head + prompt card with glow + after note)
  *   How to use it (white band — 2x2 numbered grid)
  *   FAQ (light gray band — accordion, audit-specific items)
@@ -37,6 +39,21 @@ export default function EnvironmentAuditPage() {
             </div>
           </div>
         </section>
+
+        {/* ─── Video (explainer; whole band self-hides without an id) ─ */}
+        {page.video?.youtubeId && (
+          <section className="section-wrap audit-video grid-texture">
+            <div className="container section-pad">
+              <div className="audit-video-wrap">
+                <VideoEmbed
+                  youtubeId={page.video.youtubeId}
+                  title={page.video.title}
+                  poster={page.video.poster}
+                />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ─── Prompt ──────────────────────────────────────────────── */}
         <section className="section-wrap audit-prompt-band">

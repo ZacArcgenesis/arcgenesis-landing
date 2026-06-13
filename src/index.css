@@ -1005,6 +1005,94 @@ img { max-width: 100%; display: block; }
   border-bottom-color: var(--accent);
 }
 
+/* ─── Audit explainer video (dark band, sits below the hero) ─────────────── */
+.audit-video {
+  background: var(--dark);
+  color: var(--white);
+  /* Tight to the hero above, normal breathing room below. */
+  position: relative;
+}
+.audit-video .section-pad {
+  padding-block: clamp(2.5rem, 6vw, 4rem) clamp(4rem, 11vw, 8rem);
+}
+.audit-video-wrap {
+  max-width: 820px;
+  margin-inline: auto;
+}
+/* 16:9 frame with the design-system rounded corners + a cyan-tinted lift. */
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(55, 211, 241, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 28px 70px rgba(0, 0, 0, 0.45);
+  background: var(--dark-2);
+}
+.video-embed-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+/* Poster button — fills the frame, image cover, play badge centered. */
+.video-embed-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: var(--dark-2);
+  display: block;
+  overflow: hidden;
+}
+.video-embed-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+}
+.video-embed-poster:hover img { transform: scale(1.03); filter: brightness(1.05); }
+/* Cyan play badge — circle + CSS triangle, with a soft glow. */
+.video-embed-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(56px, 9vw, 78px);
+  height: clamp(56px, 9vw, 78px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 8px 30px rgba(55, 211, 241, 0.5);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.video-embed-play::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  /* Right-pointing triangle. */
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent #0c2228;
+}
+.video-embed-poster:hover .video-embed-play {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 10px 38px rgba(55, 211, 241, 0.65);
+}
+.video-embed-poster:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 /* ─── The prompt section (light band) ───────────────────────────────────── */
 .audit-prompt-band {
   background: var(--bg);
